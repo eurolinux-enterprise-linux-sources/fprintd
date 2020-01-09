@@ -3,7 +3,7 @@
 
 Name:		fprintd
 Version:	0.1
-Release:	19.git%{short_hash}%{?dist}
+Release:	20.git%{short_hash}%{?dist}
 Summary:	D-Bus service for Fingerprint reader access
 
 Group:		System Environment/Daemons
@@ -23,6 +23,8 @@ Patch3:		0001-Remove-all-use-of-g_error.patch
 Patch4:		0001-Add-man-page-for-the-command-line-utilities.patch
 # http://bugzilla.redhat.com/614573
 Patch5:         dont-call-g-source-remove.patch
+# https://bugzilla.redhat.com/show_bug.cgi?id=665837
+Patch6:		0001-Change-g_errors-to-g_warnings.patch
 
 Url:		http://www.reactivated.net/fprint/wiki/Fprintd
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -68,6 +70,7 @@ fingerprint readers access.
 %patch3 -p1 -b .g_error
 %patch4 -p1 -b .man
 %patch5 -p1 -b .dont-call-g-source-remove
+%patch6 -p1 -b .gerror
 
 autoreconf -i -f
 
@@ -111,6 +114,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/interfaces/net.reactivated.Fprint.Manager.xml
 
 %changelog
+* Mon Sep 19 2011 Bastien Nocera <bnocera@redhat.com> 0.1-20.git04fd09cfa
+- Don't use g_error() and abort when there's no USB devices
+  Resolves: #665837
+
 * Tue Jul 27 2010 Ray Strode <rstrode@redhat.com> 0.1-19.git04fd09cfa
 - Fix screensaver unlock for some users
   Resolves: #614573
