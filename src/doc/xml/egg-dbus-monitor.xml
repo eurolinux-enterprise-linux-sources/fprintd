@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="fprintd-egg-dbus-monitor">
+<refmeta>
+<refentrytitle role="top_of_page" id="fprintd-egg-dbus-monitor.top_of_page">egg-dbus-monitor</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>FPRINTD Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>egg-dbus-monitor</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="fprintd-egg-dbus-monitor.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+#define             <link linkend="EGG-DBUS-MONITOR-ERROR:CAPS">EGG_DBUS_MONITOR_ERROR</link>
+#define             <link linkend="EGG-DBUS-MONITOR-TYPE-ERROR:CAPS">EGG_DBUS_MONITOR_TYPE_ERROR</link>
+typedef             <link linkend="EggDbusMonitorPrivate">EggDbusMonitorPrivate</link>;
+<link linkend="void">void</link>                <link linkend="connection-changed">connection_changed</link>                  (<link linkend="EggDbusMonitor">EggDbusMonitor</link> *watch,
+                                                         <link linkend="gboolean">gboolean</link> connected);
+<link linkend="void">void</link>                <link linkend="connection-replaced">connection_replaced</link>                 (<link linkend="EggDbusMonitor">EggDbusMonitor</link> *watch);
+<link linkend="EggDbusMonitor">EggDbusMonitor</link>*     <link linkend="egg-dbus-monitor-new">egg_dbus_monitor_new</link>                (void);
+<link linkend="gboolean">gboolean</link>            <link linkend="egg-dbus-monitor-assign">egg_dbus_monitor_assign</link>             (<link linkend="EggDbusMonitor">EggDbusMonitor</link> *monitor,
+                                                         <link linkend="DBusGConnection">DBusGConnection</link> *connection,
+                                                         const <link linkend="gchar">gchar</link> *service);
+const <link linkend="gchar">gchar</link>*        <link linkend="egg-dbus-monitor-get-service">egg_dbus_monitor_get_service</link>        (<link linkend="EggDbusMonitor">EggDbusMonitor</link> *monitor);
+<link linkend="gboolean">gboolean</link>            <link linkend="egg-dbus-monitor-is-connected">egg_dbus_monitor_is_connected</link>       (<link linkend="EggDbusMonitor">EggDbusMonitor</link> *monitor);
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 id="fprintd-egg-dbus-monitor.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="fprintd-egg-dbus-monitor.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="EGG-DBUS-MONITOR-ERROR:CAPS" role="macro">
+<title>EGG_DBUS_MONITOR_ERROR</title>
+<indexterm zone="EGG-DBUS-MONITOR-ERROR:CAPS"><primary>EGG_DBUS_MONITOR_ERROR</primary></indexterm><programlisting>#define EGG_DBUS_MONITOR_ERROR		(egg_dbus_monitor_error_quark ())
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="EGG-DBUS-MONITOR-TYPE-ERROR:CAPS" role="macro">
+<title>EGG_DBUS_MONITOR_TYPE_ERROR</title>
+<indexterm zone="EGG-DBUS-MONITOR-TYPE-ERROR:CAPS"><primary>EGG_DBUS_MONITOR_TYPE_ERROR</primary></indexterm><programlisting>#define EGG_DBUS_MONITOR_TYPE_ERROR	(egg_dbus_monitor_error_get_type ())
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="EggDbusMonitorPrivate" role="typedef">
+<title>EggDbusMonitorPrivate</title>
+<indexterm zone="EggDbusMonitorPrivate"><primary>EggDbusMonitorPrivate</primary></indexterm><programlisting>typedef struct EggDbusMonitorPrivate EggDbusMonitorPrivate;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="connection-changed" role="function">
+<title>connection_changed ()</title>
+<indexterm zone="connection-changed"><primary>connection_changed</primary></indexterm><programlisting><link linkend="void">void</link>                connection_changed                  (<link linkend="EggDbusMonitor">EggDbusMonitor</link> *watch,
+                                                         <link linkend="gboolean">gboolean</link> connected);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>watch</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>connected</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="connection-replaced" role="function">
+<title>connection_replaced ()</title>
+<indexterm zone="connection-replaced"><primary>connection_replaced</primary></indexterm><programlisting><link linkend="void">void</link>                connection_replaced                 (<link linkend="EggDbusMonitor">EggDbusMonitor</link> *watch);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>watch</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="egg-dbus-monitor-new" role="function">
+<title>egg_dbus_monitor_new ()</title>
+<indexterm zone="egg-dbus-monitor-new"><primary>egg_dbus_monitor_new</primary></indexterm><programlisting><link linkend="EggDbusMonitor">EggDbusMonitor</link>*     egg_dbus_monitor_new                (void);</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a new EggDbusMonitor object.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="egg-dbus-monitor-assign" role="function">
+<title>egg_dbus_monitor_assign ()</title>
+<indexterm zone="egg-dbus-monitor-assign"><primary>egg_dbus_monitor_assign</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            egg_dbus_monitor_assign             (<link linkend="EggDbusMonitor">EggDbusMonitor</link> *monitor,
+                                                         <link linkend="DBusGConnection">DBusGConnection</link> *connection,
+                                                         const <link linkend="gchar">gchar</link> *service);</programlisting>
+<para>
+Emits connection-changed(TRUE) if connection is alive - this means you
+have to connect up the callback before this function is called.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>monitor</parameter>&nbsp;:</term>
+<listitem><simpara> This class instance
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>connection</parameter>&nbsp;:</term>
+<listitem><simpara> The bus connection
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>service</parameter>&nbsp;:</term>
+<listitem><simpara> The EGG_DBUS_MONITOR service name
+Return value: success
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="egg-dbus-monitor-get-service" role="function">
+<title>egg_dbus_monitor_get_service ()</title>
+<indexterm zone="egg-dbus-monitor-get-service"><primary>egg_dbus_monitor_get_service</primary></indexterm><programlisting>const <link linkend="gchar">gchar</link>*        egg_dbus_monitor_get_service        (<link linkend="EggDbusMonitor">EggDbusMonitor</link> *monitor);</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>monitor</parameter>&nbsp;:</term>
+<listitem><simpara> This class instance
+Return value: the service name being monitored
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="egg-dbus-monitor-is-connected" role="function">
+<title>egg_dbus_monitor_is_connected ()</title>
+<indexterm zone="egg-dbus-monitor-is-connected"><primary>egg_dbus_monitor_is_connected</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            egg_dbus_monitor_is_connected       (<link linkend="EggDbusMonitor">EggDbusMonitor</link> *monitor);</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>monitor</parameter>&nbsp;:</term>
+<listitem><simpara> This class instance
+Return value: if we are connected to a valid watch
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

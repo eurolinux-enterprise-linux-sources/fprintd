@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE book PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
+<book xmlns="http://www.devhelp.net/book" title="fprintd Reference Manual" link="index.html" author="Bastien Nocera" name="fprintd">
+  <chapters>
+    <sub name="D-Bus API Reference" link="ref-dbus.html">
+      <sub name="net.reactivated.Fprint.Manager" link="Manager.html"/>
+      <sub name="net.reactivated.Fprint.Device" link="Device.html"/>
+    </sub>
+    <sub name="Index" link="ix01.html"/>
+    <sub name="License" link="license.html"/>
+  </chapters>
+  <functions>
+    <function name="GetDevices ()" link="Manager.html#Manager.GetDevices"/>
+    <function name="GetDefaultDevice ()" link="Manager.html#Manager.GetDefaultDevice"/>
+    <function name="&#10;&#9;&#9;&#9;&#9;PolicyKit integration&#10;&#9;&#9;&#9;" link="Device.html#polkit-integration"/>
+    <function name="&#10;&#9;&#9;&#9;&#9;Usernames&#10;&#9;&#9;&#9;" link="Device.html#usernames"/>
+    <function name="&#10;&#9;&#9;&#9;&#9;Fingerprint names&#10;&#9;&#9;&#9;" link="Device.html#fingerprint-names"/>
+    <function name="&#10;&#9;&#9;&#9;&#9;Verify Statuses&#10;&#9;&#9;&#9;" link="Device.html#verify-statuses"/>
+    <function name="&#10;&#9;&#9;&#9;&#9;Enroll Statuses&#10;&#9;&#9;&#9;" link="Device.html#enroll-statuses"/>
+    <function name="ListEnrolledFingers ()" link="Device.html#Device.ListEnrolledFingers"/>
+    <function name="DeleteEnrolledFingers ()" link="Device.html#Device.DeleteEnrolledFingers"/>
+    <function name="Claim ()" link="Device.html#Device.Claim"/>
+    <function name="Release ()" link="Device.html#Device.Release"/>
+    <function name="VerifyStart ()" link="Device.html#Device.VerifyStart"/>
+    <function name="VerifyStop ()" link="Device.html#Device.VerifyStop"/>
+    <function name="EnrollStart ()" link="Device.html#Device.EnrollStart"/>
+    <function name="EnrollStop ()" link="Device.html#Device.EnrollStop"/>
+    <function name="The VerifyFingerSelected signal" link="Device.html#Device::VerifyFingerSelected"/>
+    <function name="The VerifyStatus signal" link="Device.html#Device::VerifyStatus"/>
+    <function name="The EnrollStatus signal" link="Device.html#Device::EnrollStatus"/>
+    <function name="The &quot;name&quot; property" link="Device.html#Device:name"/>
+    <function name="The &quot;num-enroll-stages&quot; property" link="Device.html#Device:num-enroll-stages"/>
+    <function name="The &quot;scan-type&quot; property" link="Device.html#Device:scan-type"/>
+  </functions>
+</book>

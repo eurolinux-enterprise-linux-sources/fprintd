@@ -1,0 +1,3 @@
+egg_dbus_monitor_get_type
+fprint_manager_get_type
+fprint_device_get_type

@@ -1,0 +1,228 @@
+<!-- ##### SECTION Title ##### -->
+fprintd
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO TIMEOUT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO FPRINT_SERVICE_NAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### VARIABLE fprintd_dbus_conn ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fprint_error_quark ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO FPRINT_ERROR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### ENUM FprintError ##### -->
+<para>
+
+</para>
+
+@FPRINT_ERROR_CLAIM_DEVICE: 
+@FPRINT_ERROR_ALREADY_IN_USE: 
+@FPRINT_ERROR_INTERNAL: 
+@FPRINT_ERROR_PERMISSION_DENIED: 
+@FPRINT_ERROR_NO_ENROLLED_PRINTS: 
+@FPRINT_ERROR_NO_ACTION_IN_PROGRESS: 
+@FPRINT_ERROR_INVALID_FINGERNAME: 
+@FPRINT_ERROR_NO_SUCH_DEVICE: 
+
+<!-- ##### TYPEDEF FprintManager ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### TYPEDEF FprintManagerClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fprint_manager_new ##### -->
+<para>
+
+</para>
+
+@no_timeout: 
+@Returns: 
+
+
+<!-- ##### MACRO FPRINT_TYPE_DEVICE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO FPRINT_DEVICE ##### -->
+<para>
+
+</para>
+
+@object: 
+
+
+<!-- ##### MACRO FPRINT_DEVICE_CLASS ##### -->
+<para>
+
+</para>
+
+@klass: 
+
+
+<!-- ##### MACRO FPRINT_IS_DEVICE ##### -->
+<para>
+
+</para>
+
+@object: 
+
+
+<!-- ##### MACRO FPRINT_IS_DEVICE_CLASS ##### -->
+<para>
+
+</para>
+
+@klass: 
+
+
+<!-- ##### MACRO FPRINT_DEVICE_GET_CLASS ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### TYPEDEF FprintDevice ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SIGNAL FprintDevice::enroll-status ##### -->
+<para>
+
+</para>
+
+@fprintdevice: the object which received the signal.
+@arg1: 
+@arg2: 
+
+<!-- ##### SIGNAL FprintDevice::verify-finger-selected ##### -->
+<para>
+
+</para>
+
+@fprintdevice: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL FprintDevice::verify-status ##### -->
+<para>
+
+</para>
+
+@fprintdevice: the object which received the signal.
+@arg1: 
+@arg2: 
+
+<!-- ##### ARG FprintDevice:discovered-dev ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FprintDevice:in-use ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FprintDevice:name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FprintDevice:num-enroll-stages ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG FprintDevice:scan-type ##### -->
+<para>
+
+</para>
+
+<!-- ##### TYPEDEF FprintDeviceClass ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION fprint_device_new ##### -->
+<para>
+
+</para>
+
+@ddev: 
+@Returns: 
+
+
+<!-- ##### FUNCTION fprint_device_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### VARIABLE dbus_glib_fprint_manager_object_info ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### VARIABLE dbus_glib_fprint_device_object_info ##### -->
+<para>
+
+</para>
+
+

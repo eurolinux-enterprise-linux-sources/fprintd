@@ -1,0 +1,316 @@
+<?xml version="1.0"?><!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="Device">
+  <refmeta>
+    <refentrytitle role="top_of_page">net.reactivated.Fprint.Device</refentrytitle>
+  </refmeta>
+  <refnamediv>
+    <refname>net.reactivated.Fprint.Device</refname>
+    <refpurpose>Device interface</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv role="synopsis">
+    <title role="synopsis.title">Methods</title>
+    <synopsis><link linkend="Device.ListEnrolledFingers">ListEnrolledFingers</link>   (in  's'  username,
+                       out 'as' enrolled_fingers)
+<link linkend="Device.DeleteEnrolledFingers">DeleteEnrolledFingers</link> (in  's'  username)
+<link linkend="Device.Claim">Claim</link>                 (in  's'  username)
+<link linkend="Device.Release">Release</link>               ()
+<link linkend="Device.VerifyStart">VerifyStart</link>           (in  's'  finger_name)
+<link linkend="Device.VerifyStop">VerifyStop</link>            ()
+<link linkend="Device.EnrollStart">EnrollStart</link>           (in  's'  finger_name)
+<link linkend="Device.EnrollStop">EnrollStop</link>            ()
+</synopsis>
+  </refsynopsisdiv>
+  <refsect1 role="signal_proto">
+    <title role="signal_proto.title">Signals</title>
+    <synopsis><link linkend="Device::VerifyFingerSelected">VerifyFingerSelected</link> ('s' finger_name)
+<link linkend="Device::VerifyStatus">VerifyStatus</link>         ('s' result,
+                      'b' done)
+<link linkend="Device::EnrollStatus">EnrollStatus</link>         ('s' result,
+                      'b' done)
+</synopsis>
+  </refsect1>
+  <refsect1 role="impl_interfaces">
+    <title role="impl_interfaces.title">Implemented Interfaces</title>
+    <para>
+    Objects implementing net.reactivated.Fprint.Device also implements
+    org.freedesktop.DBus.Introspectable,
+    org.freedesktop.DBus.Properties
+    </para>
+  </refsect1>
+  <refsect1 role="properties">
+    <title role="properties.title">Properties</title>
+    <synopsis><link linkend="Device:name">'name'</link>              read      's'
+<link linkend="Device:num-enroll-stages">'num-enroll-stages'</link> read      'i'
+<link linkend="Device:scan-type">'scan-type'</link>         read      's'
+</synopsis>
+  </refsect1>
+  <refsect1 role="desc">
+    <title role="desc.title">Description</title>
+    <para>
+			<refsect2><title role="title.description"><anchor role="description" id="polkit-integration"/>
+				PolicyKit integration
+			</title></refsect2>
+			<para>
+				fprintd uses PolicyKit to check whether users are allowed to access fingerprint data, or the
+				fingerprint readers itself.
+				<para><itemizedlist><listitem><emphasis role="bold">net.reactivated.fprint.device.verify: </emphasis>
+							Whether the user is allowed to verify fingers against saved fingerprints.
+						</listitem><listitem><emphasis role="bold">net.reactivated.fprint.device.enroll: </emphasis>
+							Whether the user is allowed to enroll new fingerprints.
+						</listitem><listitem><emphasis role="bold">net.reactivated.fprint.device.setusername: </emphasis>
+							Whether the user is allowed to query, verify, or enroll fingerprints for users other than itself.
+						</listitem></itemizedlist></para>
+			</para>
+
+			<refsect2><title role="title.description"><anchor role="description" id="usernames"/>
+				Usernames
+			</title></refsect2>
+			<para>
+				When a username argument is used for a method, a PolicyKit check is done on the
+				<literal>net.reactivated.fprint.device.setusername</literal> PolicyKit
+				action to see whether the user the client is running as is allowed to access data from other users.
+			</para>
+			<para>
+				By default, only root is allowed to access fingerprint data for users other than itself. For a normal user,
+				it is recommended that you use an empty string for the username, which will mean "the client the user is
+				running as".
+			</para>
+			<para>
+				See <link linkend="polkit-integration">PolicyKit integration</link>.
+			</para>
+
+			<refsect2><title role="title.description"><anchor role="description" id="fingerprint-names"/>
+				Fingerprint names
+			</title></refsect2>
+			<para>
+				When a finger name argument is used for a method, it refers to either a single finger, or
+				"any" finger. See the list of possible values below:
+				<para><itemizedlist><listitem><emphasis role="bold">left-thumb: </emphasis>
+							Left thumb
+						</listitem><listitem><emphasis role="bold">left-index-finger: </emphasis>
+							Left index finger
+						</listitem><listitem><emphasis role="bold">left-middle-finger: </emphasis>
+							Left middle finger
+						</listitem><listitem><emphasis role="bold">left-ring-finger: </emphasis>
+							Left ring finger
+						</listitem><listitem><emphasis role="bold">left-little-finger: </emphasis>
+							Left little finger
+						</listitem><listitem><emphasis role="bold">right-thumb: </emphasis>
+							Right thumb
+						</listitem><listitem><emphasis role="bold">right-index-finger: </emphasis>
+							Right index finger
+						</listitem><listitem><emphasis role="bold">right-middle-finger: </emphasis>
+							Right middle finger
+						</listitem><listitem><emphasis role="bold">right-ring-finger: </emphasis>
+							Right ring finger
+						</listitem><listitem><emphasis role="bold">right-little-finger: </emphasis>
+							Right little finger
+						</listitem><listitem><emphasis role="bold">any: </emphasis>
+							Any finger. This is only used for <link linkend="Device.VerifyStart"><function>Device.VerifyStart</function></link>
+							(select the first finger with a fingerprint associated, or all the fingerprints available for the user when
+							the device supports it) and <link linkend="Device::VerifyFingerSelected"><literal>Device::VerifyFingerSelected</literal></link>
+							(any finger with an associated fingerprint can be used).
+						</listitem></itemizedlist></para>
+			</para>
+
+			<refsect2><title role="title.description"><anchor role="description" id="verify-statuses"/>
+				Verify Statuses
+			</title></refsect2>
+			<para>
+				<para><itemizedlist><listitem><emphasis role="bold">verify-no-match: </emphasis>
+							The verification did not match, <link linkend="Device.VerifyStop"><function>Device.VerifyStop</function></link> should now be called.
+						</listitem><listitem><emphasis role="bold">verify-match: </emphasis>
+							The verification succeeded, <link linkend="Device.VerifyStop"><function>Device.VerifyStop</function></link> should now be called.
+						</listitem><listitem><emphasis role="bold">verify-retry-scan: </emphasis>
+							The user should retry scanning their finger, the verification is still ongoing.
+						</listitem><listitem><emphasis role="bold">verify-swipe-too-short: </emphasis>
+							The user's swipe was too short. The user should retry scanning their finger, the verification is still ongoing.
+						</listitem><listitem><emphasis role="bold">verify-finger-not-centered: </emphasis>
+							The user's finger was not centered on the reader. The user should retry scanning their finger, the verification is still ongoing.
+						</listitem><listitem><emphasis role="bold">verify-remove-and-retry: </emphasis>
+							The user should remove their finger from the reader and retry scanning their finger, the verification is still ongoing.
+						</listitem><listitem><emphasis role="bold">verify-unknown-error: </emphasis>
+							An unknown error occurred (usually a driver problem), <link linkend="Device.VerifyStop"><function>Device.VerifyStop</function></link> should now be called.
+						</listitem></itemizedlist></para>
+			</para>
+
+			<refsect2><title role="title.description"><anchor role="description" id="enroll-statuses"/>
+				Enroll Statuses
+			</title></refsect2>
+			<para>
+				<para><itemizedlist><listitem><emphasis role="bold">enroll-completed: </emphasis>
+							The enrollment successfully completed, <link linkend="Device.EnrollStop"><function>Device.EnrollStop</function></link> should now be called.
+						</listitem><listitem><emphasis role="bold">enroll-failed: </emphasis>
+							The enrollment failed, <link linkend="Device.EnrollStop"><function>Device.EnrollStop</function></link> should now be called.
+						</listitem><listitem><emphasis role="bold">enroll-stage-passed: </emphasis>
+							One stage of the enrollment passed, the enrollment is still ongoing.
+						</listitem><listitem><emphasis role="bold">enroll-retry-scan: </emphasis>
+							The user should retry scanning their finger, the enrollment is still ongoing.
+						</listitem><listitem><emphasis role="bold">enroll-swipe-too-short: </emphasis>
+							The user's swipe was too short. The user should retry scanning their finger, the enrollment is still ongoing.
+						</listitem><listitem><emphasis role="bold">enroll-finger-not-centered: </emphasis>
+							The user's finger was not centered on the reader. The user should retry scanning their finger, the enrollment is still ongoing.
+						</listitem><listitem><emphasis role="bold">enroll-remove-and-retry: </emphasis>
+							The user should remove their finger from the reader and retry scanning their finger, the enrollment is still ongoing.
+						</listitem><listitem><emphasis role="bold">enroll-unknown-error: </emphasis>
+							An unknown error occurred (usually a driver problem), <link linkend="Device.EnrollStop"><function>Device.EnrollStop</function></link> should now be called.
+
+						</listitem></itemizedlist></para>
+			</para>
+		</para>
+  </refsect1>
+  <refsect1 role="details"><title role="details.title">Details</title><refsect2><title><anchor role="function" id="Device.ListEnrolledFingers"/>ListEnrolledFingers ()</title><indexterm><primary>ListEnrolledFingers</primary><secondary>Device</secondary></indexterm><programlisting>ListEnrolledFingers (in  's'  username,
+                     out 'as' enrolled_fingers)</programlisting></refsect2>
+					<para>
+						List all the enrolled fingerprints for the chosen user.
+					</para>
+				<variablelist role="params"><varlistentry><term><parameter>username</parameter>:</term><listitem><simpara>The username for whom to list the enrolled fingerprints. See <link linkend="usernames">Usernames</link>.</simpara></listitem></varlistentry><varlistentry><term><parameter>enrolled_fingers</parameter>:</term><listitem><simpara>An array of strings representing the enrolled fingerprints. See <link linkend="fingerprint-names">Fingerprint names</link>.</simpara></listitem></varlistentry></variablelist><refsect3><title>Errors</title><variablelist role="errors"><varlistentry><term><parameter>net.reactivated.Fprint.Error.PermissionDenied</parameter>:</term><listitem><simpara>if the caller lacks the appropriate PolicyKit authorization</simpara></listitem></varlistentry><varlistentry><term><parameter>net.reactivated.Fprint.Error.NoEnrolledPrints</parameter>:</term><listitem><simpara>if the chosen user doesn't have any fingerprints enrolled</simpara></listitem></varlistentry></variablelist></refsect3><refsect2><title><anchor role="function" id="Device.DeleteEnrolledFingers"/>DeleteEnrolledFingers ()</title><indexterm><primary>DeleteEnrolledFingers</primary><secondary>Device</secondary></indexterm><programlisting>DeleteEnrolledFingers (in  's' username)</programlisting></refsect2>
+					<para>
+						Delete all the enrolled fingerprints for the chosen user.
+					</para>
+				<variablelist role="params"><varlistentry><term><parameter>username</parameter>:</term><listitem><simpara>The username for whom to delete the enrolled fingerprints. See <link linkend="usernames">Usernames</link>.</simpara></listitem></varlistentry></variablelist><refsect3><title>Errors</title><variablelist role="errors"><varlistentry><term><parameter>net.reactivated.Fprint.Error.PermissionDenied</parameter>:</term><listitem><simpara>if the caller lacks the appropriate PolicyKit authorization</simpara></listitem></varlistentry></variablelist></refsect3><refsect2><title><anchor role="function" id="Device.Claim"/>Claim ()</title><indexterm><primary>Claim</primary><secondary>Device</secondary></indexterm><programlisting>Claim (in  's' username)</programlisting></refsect2>
+					<para>
+						Claim the device for the chosen user.
+					</para>
+				<variablelist role="params"><varlistentry><term><parameter>username</parameter>:</term><listitem><simpara>The username for whom to claim the device. See <link linkend="usernames">Usernames</link>.</simpara></listitem></varlistentry></variablelist><refsect3><title>Errors</title><variablelist role="errors"><varlistentry><term><parameter>net.reactivated.Fprint.Error.PermissionDenied</parameter>:</term><listitem><simpara>if the caller lacks the appropriate PolicyKit authorization</simpara></listitem></varlistentry><varlistentry><term><parameter>net.reactivated.Fprint.Error.AlreadyInUse</parameter>:</term><listitem><simpara>if the device is already claimed</simpara></listitem></varlistentry><varlistentry><term><parameter>net.reactivated.Fprint.Error.Internal</parameter>:</term><listitem><simpara>if the device couldn't be claimed</simpara></listitem></varlistentry></variablelist></refsect3><refsect2><title><anchor role="function" id="Device.Release"/>Release ()</title><indexterm><primary>Release</primary><secondary>Device</secondary></indexterm><programlisting>Release ()</programlisting></refsect2>
+					<para>
+						Release a device claimed with <link linkend="Device.Claim"><function>Device.Claim</function></link>.
+					</para>
+				<variablelist role="params"/><refsect3><title>Errors</title><variablelist role="errors"><varlistentry><term><parameter>net.reactivated.Fprint.Error.PermissionDenied</parameter>:</term><listitem><simpara>if the caller lacks the appropriate PolicyKit authorization</simpara></listitem></varlistentry><varlistentry><term><parameter>net.reactivated.Fprint.Error.ClaimDevice</parameter>:</term><listitem><simpara>if the device was not claimed</simpara></listitem></varlistentry></variablelist></refsect3><refsect2><title><anchor role="function" id="Device.VerifyStart"/>VerifyStart ()</title><indexterm><primary>VerifyStart</primary><secondary>Device</secondary></indexterm><programlisting>VerifyStart (in  's' finger_name)</programlisting></refsect2>
+					<para>
+						Check the chosen finger against a saved fingerprint. You need to have claimed the device using
+						<link linkend="Device.Claim"><function>Device.Claim</function></link>. The finger selected is sent to the front-end
+						using <link linkend="Device::VerifyFingerSelected"><literal>Device::VerifyFingerSelected</literal></link> and
+						verification status through <link linkend="Device::VerifyStatus"><literal>Device::VerifyStatus</literal></link>.
+					</para>
+				<variablelist role="params"><varlistentry><term><parameter>finger_name</parameter>:</term><listitem><simpara>A string representing the finger to verify. See <link linkend="fingerprint-names">Fingerprint names</link>.</simpara></listitem></varlistentry></variablelist><refsect3><title>Errors</title><variablelist role="errors"><varlistentry><term><parameter>net.reactivated.Fprint.Error.PermissionDenied</parameter>:</term><listitem><simpara>if the caller lacks the appropriate PolicyKit authorization</simpara></listitem></varlistentry><varlistentry><term><parameter>net.reactivated.Fprint.Error.ClaimDevice</parameter>:</term><listitem><simpara>if the device was not claimed</simpara></listitem></varlistentry><varlistentry><term><parameter>net.reactivated.Fprint.Error.AlreadyInUse</parameter>:</term><listitem><simpara>if the device was already being used</simpara></listitem></varlistentry><varlistentry><term><parameter>net.reactivated.Fprint.Error.NoEnrolledPrints</parameter>:</term><listitem><simpara>if there are no enrolled prints for the chosen user</simpara></listitem></varlistentry><varlistentry><term><parameter>net.reactivated.Fprint.Error.Internal</parameter>:</term><listitem><simpara>if there was an internal error</simpara></listitem></varlistentry></variablelist></refsect3><refsect2><title><anchor role="function" id="Device.VerifyStop"/>VerifyStop ()</title><indexterm><primary>VerifyStop</primary><secondary>Device</secondary></indexterm><programlisting>VerifyStop ()</programlisting></refsect2>
+					<para>
+						Stop an on-going fingerprint verification started with <link linkend="Device.VerifyStart"><function>Device.VerifyStart</function></link>.
+					</para>
+				<variablelist role="params"/><refsect3><title>Errors</title><variablelist role="errors"><varlistentry><term><parameter>net.reactivated.Fprint.Error.PermissionDenied</parameter>:</term><listitem><simpara>if the caller lacks the appropriate PolicyKit authorization</simpara></listitem></varlistentry><varlistentry><term><parameter>net.reactivated.Fprint.Error.ClaimDevice</parameter>:</term><listitem><simpara>if the device was not claimed</simpara></listitem></varlistentry><varlistentry><term><parameter>net.reactivated.Fprint.Error.NoActionInProgress</parameter>:</term><listitem><simpara>if there was no ongoing verification</simpara></listitem></varlistentry><varlistentry><term><parameter>net.reactivated.Fprint.Error.Internal</parameter>:</term><listitem><simpara>if there was an internal error</simpara></listitem></varlistentry></variablelist></refsect3><refsect2><title><anchor role="function" id="Device.EnrollStart"/>EnrollStart ()</title><indexterm><primary>EnrollStart</primary><secondary>Device</secondary></indexterm><programlisting>EnrollStart (in  's' finger_name)</programlisting></refsect2>
+					<para>
+						Start enrollemnt for the selected finger. You need to have claimed the device using
+						<link linkend="Device.Claim"><function>Device.Claim</function></link> before calling
+						this method. Enrollment status is sent through <link linkend="Device::EnrollStatus"><literal>Device::EnrollStatus</literal></link>.
+					</para>
+				<variablelist role="params"><varlistentry><term><parameter>finger_name</parameter>:</term><listitem><simpara>A string representing the finger to enroll. See
+				<link linkend="fingerprint-names">Fingerprint names</link>.
+				Note that "any" is not a valid finger name for this method.</simpara></listitem></varlistentry></variablelist><refsect3><title>Errors</title><variablelist role="errors"><varlistentry><term><parameter>net.reactivated.Fprint.Error.PermissionDenied</parameter>:</term><listitem><simpara>if the caller lacks the appropriate PolicyKit authorization</simpara></listitem></varlistentry><varlistentry><term><parameter>net.reactivated.Fprint.Error.ClaimDevice</parameter>:</term><listitem><simpara>if the device was not claimed</simpara></listitem></varlistentry><varlistentry><term><parameter>net.reactivated.Fprint.Error.AlreadyInUse</parameter>:</term><listitem><simpara>if the device was already being used</simpara></listitem></varlistentry><varlistentry><term><parameter>net.reactivated.Fprint.Error.InvalidFingername</parameter>:</term><listitem><simpara>if there are no enrolled prints for the chosen user</simpara></listitem></varlistentry><varlistentry><term><parameter>net.reactivated.Fprint.Error.Internal</parameter>:</term><listitem><simpara>if there was an internal error</simpara></listitem></varlistentry></variablelist></refsect3><refsect2><title><anchor role="function" id="Device.EnrollStop"/>EnrollStop ()</title><indexterm><primary>EnrollStop</primary><secondary>Device</secondary></indexterm><programlisting>EnrollStop ()</programlisting></refsect2>
+					<para>
+						Stop an on-going fingerprint enrollment started with <link linkend="Device.EnrollStart"><function>Device.EnrollStart</function></link>.
+					</para>
+				<variablelist role="params"/><refsect3><title>Errors</title><variablelist role="errors"><varlistentry><term><parameter>net.reactivated.Fprint.Error.PermissionDenied</parameter>:</term><listitem><simpara>if the caller lacks the appropriate PolicyKit authorization</simpara></listitem></varlistentry><varlistentry><term><parameter>net.reactivated.Fprint.Error.ClaimDevice</parameter>:</term><listitem><simpara>if the device was not claimed</simpara></listitem></varlistentry><varlistentry><term><parameter>net.reactivated.Fprint.Error.NoActionInProgress</parameter>:</term><listitem><simpara>if there was no ongoing verification</simpara></listitem></varlistentry><varlistentry><term><parameter>net.reactivated.Fprint.Error.Internal</parameter>:</term><listitem><simpara>if there was an internal error</simpara></listitem></varlistentry></variablelist></refsect3></refsect1>
+  <refsect1 role="signals">
+    <title role="signals.title">Signal Details</title>
+    <refsect2>
+      <title><anchor role="function" id="Device::VerifyFingerSelected"/>The VerifyFingerSelected signal</title>
+      <indexterm>
+        <primary>VerifyFingerSelected</primary>
+        <secondary>Device</secondary>
+      </indexterm>
+      <programlisting>VerifyFingerSelected ('s' finger_name)</programlisting>
+    </refsect2>
+    <variablelist role="params">
+      <varlistentry>
+        <term><parameter>finger_name</parameter>:</term>
+        <listitem>
+          <simpara>
+						
+							A string representing the finger select to be verified.
+						
+					</simpara>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+    <para>
+See also:
+
+					<link linkend="fingerprint-names">Fingerprint names</link>.
+				</para>
+    <refsect2>
+      <title><anchor role="function" id="Device::VerifyStatus"/>The VerifyStatus signal</title>
+      <indexterm>
+        <primary>VerifyStatus</primary>
+        <secondary>Device</secondary>
+      </indexterm>
+      <programlisting>VerifyStatus ('s' result,
+              'b' done)</programlisting>
+    </refsect2>
+    <variablelist role="params">
+      <varlistentry>
+        <term><parameter>result</parameter>:</term>
+        <listitem>
+          <simpara>
+						A string representing the status of the verification.
+					</simpara>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><parameter>done</parameter>:</term>
+        <listitem>
+          <simpara>
+						Whether the verification finished and can be stopped.
+					</simpara>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+    <para>
+See also:
+
+					<link linkend="verify-statuses">Verify Statuses</link> and <link linkend="Device.VerifyStop"><function>Device.VerifyStop</function></link>.
+				</para>
+    <refsect2>
+      <title><anchor role="function" id="Device::EnrollStatus"/>The EnrollStatus signal</title>
+      <indexterm>
+        <primary>EnrollStatus</primary>
+        <secondary>Device</secondary>
+      </indexterm>
+      <programlisting>EnrollStatus ('s' result,
+              'b' done)</programlisting>
+    </refsect2>
+    <variablelist role="params">
+      <varlistentry>
+        <term><parameter>result</parameter>:</term>
+        <listitem>
+          <simpara>
+						A string representing the status of the enrollment.
+					</simpara>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><parameter>done</parameter>:</term>
+        <listitem>
+          <simpara>
+						Whether the enrollment finished and can be stopped.
+					</simpara>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+    <para>
+See also:
+
+					<link linkend="enroll-statuses">Enrollment Statuses</link> and <link linkend="Device.EnrollStop"><function>Device.EnrollStop</function></link>.
+				</para>
+  </refsect1>
+  <refsect1 role="property_details"><title role="property_details.title">Property Details</title><refsect2><title><anchor role="function" id="Device:name"/>The "name" property</title><indexterm><primary>name</primary><secondary>Device</secondary></indexterm><programlisting>'name'  read      's'
+</programlisting></refsect2>
+					<para>
+						The product name of the device.
+					</para>
+				<variablelist role="params"/><refsect2><title><anchor role="function" id="Device:num-enroll-stages"/>The "num-enroll-stages" property</title><indexterm><primary>num-enroll-stages</primary><secondary>Device</secondary></indexterm><programlisting>'num-enroll-stages'  read      'i'
+</programlisting></refsect2>
+					<para>
+						The number of enrollment stages for the device. This is only available when the device has been claimed, otherwise it will be undefined (-1).
+					</para>
+					<para>
+See also:
+
+						<link linkend="Device.Claim"><function>Device.Claim</function></link> and <link linkend="Device.EnrollStart"><function>Device.EnrollStart</function></link>.
+					</para>
+				<variablelist role="params"/><refsect2><title><anchor role="function" id="Device:scan-type"/>The "scan-type" property</title><indexterm><primary>scan-type</primary><secondary>Device</secondary></indexterm><programlisting>'scan-type'  read      's'
+</programlisting></refsect2>
+					<para>
+						The scan type of the device, either "press" if you place your finger on the device, or "swipe" if you have to swipe your finger.
+					</para>
+				<variablelist role="params"/></refsect1>
+</refentry>

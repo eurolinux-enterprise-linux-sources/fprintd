@@ -1,0 +1,93 @@
+<!-- ##### SECTION Title ##### -->
+egg-dbus-monitor
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO EGG_DBUS_MONITOR_ERROR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO EGG_DBUS_MONITOR_TYPE_ERROR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### TYPEDEF EggDbusMonitorPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION connection_changed ##### -->
+<para>
+
+</para>
+
+@watch: 
+@connected: 
+
+
+<!-- ##### FUNCTION connection_replaced ##### -->
+<para>
+
+</para>
+
+@watch: 
+
+
+<!-- ##### FUNCTION egg_dbus_monitor_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION egg_dbus_monitor_assign ##### -->
+<para>
+
+</para>
+
+@monitor: 
+@connection: 
+@service: 
+@Returns: 
+
+
+<!-- ##### FUNCTION egg_dbus_monitor_get_service ##### -->
+<para>
+
+</para>
+
+@monitor: 
+@Returns: 
+
+
+<!-- ##### FUNCTION egg_dbus_monitor_is_connected ##### -->
+<para>
+
+</para>
+
+@monitor: 
+@Returns: 
+
+

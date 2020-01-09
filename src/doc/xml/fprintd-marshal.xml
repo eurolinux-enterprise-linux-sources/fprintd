@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="fprintd-fprintd-marshal">
+<refmeta>
+<refentrytitle role="top_of_page" id="fprintd-fprintd-marshal.top_of_page">fprintd-marshal</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>FPRINTD Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>fprintd-marshal</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="fprintd-fprintd-marshal.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+<link linkend="void">void</link>                <link linkend="fprintd-marshal-VOID--STRING-BOOLEAN">fprintd_marshal_VOID__STRING_BOOLEAN</link>
+                                                        (<link linkend="GClosure">GClosure</link> *closure,
+                                                         <link linkend="GValue">GValue</link> *return_value,
+                                                         <link linkend="guint">guint</link> n_param_values,
+                                                         const <link linkend="GValue">GValue</link> *param_values,
+                                                         <link linkend="gpointer">gpointer</link> invocation_hint,
+                                                         <link linkend="gpointer">gpointer</link> marshal_data);
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 id="fprintd-fprintd-marshal.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="fprintd-fprintd-marshal.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="fprintd-marshal-VOID--STRING-BOOLEAN" role="function">
+<title>fprintd_marshal_VOID__STRING_BOOLEAN ()</title>
+<indexterm zone="fprintd-marshal-VOID--STRING-BOOLEAN"><primary>fprintd_marshal_VOID__STRING_BOOLEAN</primary></indexterm><programlisting><link linkend="void">void</link>                fprintd_marshal_VOID__STRING_BOOLEAN
+                                                        (<link linkend="GClosure">GClosure</link> *closure,
+                                                         <link linkend="GValue">GValue</link> *return_value,
+                                                         <link linkend="guint">guint</link> n_param_values,
+                                                         const <link linkend="GValue">GValue</link> *param_values,
+                                                         <link linkend="gpointer">gpointer</link> invocation_hint,
+                                                         <link linkend="gpointer">gpointer</link> marshal_data);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>closure</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>return_value</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>n_param_values</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>param_values</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>invocation_hint</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>marshal_data</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

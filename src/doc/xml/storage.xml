@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="fprintd-storage">
+<refmeta>
+<refentrytitle role="top_of_page" id="fprintd-storage.top_of_page">storage</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>FPRINTD Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>storage</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="fprintd-storage.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+
+<synopsis>
+#define             <link linkend="STORAGE-H:CAPS">STORAGE_H</link>
+<link linkend="int">int</link>                 (<link linkend="storage-print-data-save">*storage_print_data_save</link>)          (<link linkend="struct-fp-print-data">struct fp_print_data</link> *data,
+                                                         <link linkend="enum-fp-finger">enum fp_finger</link> finger,
+                                                         const <link linkend="char">char</link> *username);
+<link linkend="int">int</link>                 (<link linkend="storage-print-data-load">*storage_print_data_load</link>)          (<link linkend="struct-fp-dev">struct fp_dev</link> *dev,
+                                                         <link linkend="enum-fp-finger">enum fp_finger</link> finger,
+                                                         <link linkend="struct-fp-print-data">struct fp_print_data</link> **data,
+                                                         const <link linkend="char">char</link> *username);
+<link linkend="int">int</link>                 (<link linkend="storage-print-data-delete">*storage_print_data_delete</link>)        (<link linkend="struct-fp-dscv-dev">struct fp_dscv_dev</link> *dev,
+                                                         <link linkend="enum-fp-finger">enum fp_finger</link> finger,
+                                                         const <link linkend="char">char</link> *username);
+<link linkend="GSList">GSList</link>*             (<link linkend="storage-discover-prints">*storage_discover_prints</link>)          (<link linkend="struct-fp-dscv-dev">struct fp_dscv_dev</link> *dev,
+                                                         const <link linkend="char">char</link> *username);
+<link linkend="int">int</link>                 (<link linkend="storage-init">*storage_init</link>)                     (void);
+<link linkend="int">int</link>                 (<link linkend="storage-deinit">*storage_deinit</link>)                   (void);
+typedef             <link linkend="fp-storage">fp_storage</link>;
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1 id="fprintd-storage.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="fprintd-storage.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="STORAGE-H:CAPS" role="macro">
+<title>STORAGE_H</title>
+<indexterm zone="STORAGE-H:CAPS"><primary>STORAGE_H</primary></indexterm><programlisting>#define STORAGE_H
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="storage-print-data-save" role="function">
+<title>storage_print_data_save ()</title>
+<indexterm zone="storage-print-data-save"><primary>storage_print_data_save</primary></indexterm><programlisting><link linkend="int">int</link>                 (*storage_print_data_save)          (<link linkend="struct-fp-print-data">struct fp_print_data</link> *data,
+                                                         <link linkend="enum-fp-finger">enum fp_finger</link> finger,
+                                                         const <link linkend="char">char</link> *username);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>data</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>finger</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>username</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="storage-print-data-load" role="function">
+<title>storage_print_data_load ()</title>
+<indexterm zone="storage-print-data-load"><primary>storage_print_data_load</primary></indexterm><programlisting><link linkend="int">int</link>                 (*storage_print_data_load)          (<link linkend="struct-fp-dev">struct fp_dev</link> *dev,
+                                                         <link linkend="enum-fp-finger">enum fp_finger</link> finger,
+                                                         <link linkend="struct-fp-print-data">struct fp_print_data</link> **data,
+                                                         const <link linkend="char">char</link> *username);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>dev</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>finger</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>data</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>username</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="storage-print-data-delete" role="function">
+<title>storage_print_data_delete ()</title>
+<indexterm zone="storage-print-data-delete"><primary>storage_print_data_delete</primary></indexterm><programlisting><link linkend="int">int</link>                 (*storage_print_data_delete)        (<link linkend="struct-fp-dscv-dev">struct fp_dscv_dev</link> *dev,
+                                                         <link linkend="enum-fp-finger">enum fp_finger</link> finger,
+                                                         const <link linkend="char">char</link> *username);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>dev</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>finger</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>username</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="storage-discover-prints" role="function">
+<title>storage_discover_prints ()</title>
+<indexterm zone="storage-discover-prints"><primary>storage_discover_prints</primary></indexterm><programlisting><link linkend="GSList">GSList</link>*             (*storage_discover_prints)          (<link linkend="struct-fp-dscv-dev">struct fp_dscv_dev</link> *dev,
+                                                         const <link linkend="char">char</link> *username);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>dev</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>username</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="storage-init" role="function">
+<title>storage_init ()</title>
+<indexterm zone="storage-init"><primary>storage_init</primary></indexterm><programlisting><link linkend="int">int</link>                 (*storage_init)                     (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="storage-deinit" role="function">
+<title>storage_deinit ()</title>
+<indexterm zone="storage-deinit"><primary>storage_deinit</primary></indexterm><programlisting><link linkend="int">int</link>                 (*storage_deinit)                   (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="fp-storage" role="typedef">
+<title>fp_storage</title>
+<indexterm zone="fp-storage"><primary>fp_storage</primary></indexterm><programlisting>typedef struct storage fp_storage;
+</programlisting>
+<para>
+
+</para></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

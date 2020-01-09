@@ -1,0 +1,92 @@
+<!-- ##### SECTION Title ##### -->
+storage
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO STORAGE_H ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### USER_FUNCTION storage_print_data_save ##### -->
+<para>
+
+</para>
+
+@data: 
+@finger: 
+@username: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION storage_print_data_load ##### -->
+<para>
+
+</para>
+
+@dev: 
+@finger: 
+@data: 
+@username: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION storage_print_data_delete ##### -->
+<para>
+
+</para>
+
+@dev: 
+@finger: 
+@username: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION storage_discover_prints ##### -->
+<para>
+
+</para>
+
+@dev: 
+@username: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION storage_init ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION storage_deinit ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### TYPEDEF fp_storage ##### -->
+<para>
+
+</para>
+
+

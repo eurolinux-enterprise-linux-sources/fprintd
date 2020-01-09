@@ -1,0 +1,86 @@
+<!-- ##### SECTION Title ##### -->
+file_storage
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO FILE_STORAGE_H ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION file_storage_print_data_save ##### -->
+<para>
+
+</para>
+
+@data: 
+@finger: 
+@username: 
+@Returns: 
+
+
+<!-- ##### FUNCTION file_storage_print_data_load ##### -->
+<para>
+
+</para>
+
+@dev: 
+@finger: 
+@data: 
+@username: 
+@Returns: 
+
+
+<!-- ##### FUNCTION file_storage_print_data_delete ##### -->
+<para>
+
+</para>
+
+@dev: 
+@finger: 
+@username: 
+@Returns: 
+
+
+<!-- ##### FUNCTION file_storage_init ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION file_storage_deinit ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION file_storage_discover_prints ##### -->
+<para>
+
+</para>
+
+@dev: 
+@username: 
+@Returns: 
+
+

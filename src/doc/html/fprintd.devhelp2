@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE book PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
+<book xmlns="http://www.devhelp.net/book" title="fprintd Reference Manual" link="index.html" author="Bastien Nocera" name="fprintd" version="2">
+  <chapters>
+    <sub name="D-Bus API Reference" link="ref-dbus.html">
+      <sub name="net.reactivated.Fprint.Manager" link="Manager.html"/>
+      <sub name="net.reactivated.Fprint.Device" link="Device.html"/>
+    </sub>
+    <sub name="Index" link="ix01.html"/>
+    <sub name="License" link="license.html"/>
+  </chapters>
+  <functions>
+    <keyword type="" name="GetDevices ()" link="Manager.html#Manager.GetDevices"/>
+    <keyword type="" name="GetDefaultDevice ()" link="Manager.html#Manager.GetDefaultDevice"/>
+    <keyword type="" name="&#10;&#9;&#9;&#9;&#9;PolicyKit integration&#10;&#9;&#9;&#9;" link="Device.html#polkit-integration"/>
+    <keyword type="" name="&#10;&#9;&#9;&#9;&#9;Usernames&#10;&#9;&#9;&#9;" link="Device.html#usernames"/>
+    <keyword type="" name="&#10;&#9;&#9;&#9;&#9;Fingerprint names&#10;&#9;&#9;&#9;" link="Device.html#fingerprint-names"/>
+    <keyword type="" name="&#10;&#9;&#9;&#9;&#9;Verify Statuses&#10;&#9;&#9;&#9;" link="Device.html#verify-statuses"/>
+    <keyword type="" name="&#10;&#9;&#9;&#9;&#9;Enroll Statuses&#10;&#9;&#9;&#9;" link="Device.html#enroll-statuses"/>
+    <keyword type="" name="ListEnrolledFingers ()" link="Device.html#Device.ListEnrolledFingers"/>
+    <keyword type="" name="DeleteEnrolledFingers ()" link="Device.html#Device.DeleteEnrolledFingers"/>
+    <keyword type="" name="Claim ()" link="Device.html#Device.Claim"/>
+    <keyword type="" name="Release ()" link="Device.html#Device.Release"/>
+    <keyword type="" name="VerifyStart ()" link="Device.html#Device.VerifyStart"/>
+    <keyword type="" name="VerifyStop ()" link="Device.html#Device.VerifyStop"/>
+    <keyword type="" name="EnrollStart ()" link="Device.html#Device.EnrollStart"/>
+    <keyword type="" name="EnrollStop ()" link="Device.html#Device.EnrollStop"/>
+    <keyword type="" name="The VerifyFingerSelected signal" link="Device.html#Device::VerifyFingerSelected"/>
+    <keyword type="" name="The VerifyStatus signal" link="Device.html#Device::VerifyStatus"/>
+    <keyword type="" name="The EnrollStatus signal" link="Device.html#Device::EnrollStatus"/>
+    <keyword type="" name="The &quot;name&quot; property" link="Device.html#Device:name"/>
+    <keyword type="" name="The &quot;num-enroll-stages&quot; property" link="Device.html#Device:num-enroll-stages"/>
+    <keyword type="" name="The &quot;scan-type&quot; property" link="Device.html#Device:scan-type"/>
+  </functions>
+</book>

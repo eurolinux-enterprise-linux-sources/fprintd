@@ -1,0 +1,392 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY version SYSTEM "version.xml">
+]>
+<refentry id="fprintd-fprintd">
+<refmeta>
+<refentrytitle role="top_of_page" id="fprintd-fprintd.top_of_page">fprintd</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>FPRINTD Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>fprintd</refname>
+<refpurpose></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
+</refnamediv>
+
+<refsynopsisdiv id="fprintd-fprintd.synopsis" role="synopsis">
+<title role="synopsis.title">Synopsis</title>
+<anchor id="FprintManager"/><anchor id="FprintDevice"/>
+<synopsis>
+#define             <link linkend="TIMEOUT:CAPS">TIMEOUT</link>
+#define             <link linkend="FPRINT-SERVICE-NAME:CAPS">FPRINT_SERVICE_NAME</link>
+extern              DBusGConnection *<link linkend="fprintd-dbus-conn">fprintd_dbus_conn</link>;
+<link linkend="GQuark">GQuark</link>              <link linkend="fprint-error-quark">fprint_error_quark</link>                  (void);
+#define             <link linkend="FPRINT-ERROR:CAPS">FPRINT_ERROR</link>
+enum                <link linkend="FprintError">FprintError</link>;
+typedef             <link linkend="FprintManager">FprintManager</link>;
+typedef             <link linkend="FprintManagerClass">FprintManagerClass</link>;
+<link linkend="FprintManager">FprintManager</link>*      <link linkend="fprint-manager-new">fprint_manager_new</link>                  (<link linkend="gboolean">gboolean</link> no_timeout);
+#define             <link linkend="FPRINT-TYPE-DEVICE:CAPS">FPRINT_TYPE_DEVICE</link>
+#define             <link linkend="FPRINT-DEVICE:CAPS">FPRINT_DEVICE</link>                       (object)
+#define             <link linkend="FPRINT-DEVICE-CLASS:CAPS">FPRINT_DEVICE_CLASS</link>                 (klass)
+#define             <link linkend="FPRINT-IS-DEVICE:CAPS">FPRINT_IS_DEVICE</link>                    (object)
+#define             <link linkend="FPRINT-IS-DEVICE-CLASS:CAPS">FPRINT_IS_DEVICE_CLASS</link>              (klass)
+#define             <link linkend="FPRINT-DEVICE-GET-CLASS:CAPS">FPRINT_DEVICE_GET_CLASS</link>             (obj)
+typedef             <link linkend="FprintDevice">FprintDevice</link>;
+typedef             <link linkend="FprintDeviceClass">FprintDeviceClass</link>;
+<link linkend="FprintDevice">FprintDevice</link>*       <link linkend="fprint-device-new">fprint_device_new</link>                   (<link linkend="struct-fp-dscv-dev">struct fp_dscv_dev</link> *ddev);
+<link linkend="GType">GType</link>               <link linkend="fprint-device-get-type">fprint_device_get_type</link>              (void);
+extern              const DBusGObjectInfo <link linkend="dbus-glib-fprint-manager-object-info">dbus_glib_fprint_manager_object_info</link>;
+extern              const DBusGObjectInfo <link linkend="dbus-glib-fprint-device-object-info">dbus_glib_fprint_device_object_info</link>;
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1 id="fprintd-fprintd.object-hierarchy" role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----FprintManager
+</synopsis>
+<synopsis>
+  <link linkend="GObject">GObject</link>
+   +----FprintDevice
+</synopsis>
+
+</refsect1>
+
+
+
+
+
+<refsect1 id="fprintd-fprintd.properties" role="properties">
+<title role="properties.title">Properties</title>
+<synopsis>
+  &quot;<link linkend="FprintDevice--discovered-dev">discovered-dev</link>&quot;           <link linkend="gpointer">gpointer</link>              : Write / Construct Only
+  &quot;<link linkend="FprintDevice--in-use">in-use</link>&quot;                   <link linkend="gboolean">gboolean</link>              : Read
+  &quot;<link linkend="FprintDevice--name">name</link>&quot;                     <link linkend="gchar">gchar</link>*                : Read
+  &quot;<link linkend="FprintDevice--num-enroll-stages">num-enroll-stages</link>&quot;        <link linkend="gint">gint</link>                  : Read
+  &quot;<link linkend="FprintDevice--scan-type">scan-type</link>&quot;                <link linkend="gchar">gchar</link>*                : Read
+</synopsis>
+</refsect1>
+
+<refsect1 id="fprintd-fprintd.signals" role="signal_proto">
+<title role="signal_proto.title">Signals</title>
+<synopsis>
+  &quot;<link linkend="FprintDevice-enroll-status">enroll-status</link>&quot;                                  : Run Last
+  &quot;<link linkend="FprintDevice-verify-finger-selected">verify-finger-selected</link>&quot;                         : Run Last
+  &quot;<link linkend="FprintDevice-verify-status">verify-status</link>&quot;                                  : Run Last
+</synopsis>
+</refsect1>
+
+
+<refsect1 id="fprintd-fprintd.description" role="desc">
+<title role="desc.title">Description</title>
+<para>
+
+</para>
+</refsect1>
+
+<refsect1 id="fprintd-fprintd.details" role="details">
+<title role="details.title">Details</title>
+<refsect2 id="TIMEOUT:CAPS" role="macro">
+<title>TIMEOUT</title>
+<indexterm zone="TIMEOUT:CAPS"><primary>TIMEOUT</primary></indexterm><programlisting>#define TIMEOUT 30
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="FPRINT-SERVICE-NAME:CAPS" role="macro">
+<title>FPRINT_SERVICE_NAME</title>
+<indexterm zone="FPRINT-SERVICE-NAME:CAPS"><primary>FPRINT_SERVICE_NAME</primary></indexterm><programlisting>#define FPRINT_SERVICE_NAME "net.reactivated.Fprint"
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="fprintd-dbus-conn" role="variable">
+<title>fprintd_dbus_conn</title>
+<indexterm zone="fprintd-dbus-conn"><primary>fprintd_dbus_conn</primary></indexterm><programlisting>extern DBusGConnection *fprintd_dbus_conn;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="fprint-error-quark" role="function">
+<title>fprint_error_quark ()</title>
+<indexterm zone="fprint-error-quark"><primary>fprint_error_quark</primary></indexterm><programlisting><link linkend="GQuark">GQuark</link>              fprint_error_quark                  (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="FPRINT-ERROR:CAPS" role="macro">
+<title>FPRINT_ERROR</title>
+<indexterm zone="FPRINT-ERROR:CAPS"><primary>FPRINT_ERROR</primary></indexterm><programlisting>#define FPRINT_ERROR fprint_error_quark()
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="FprintError" role="enum">
+<title>enum FprintError</title>
+<indexterm zone="FprintError"><primary>FprintError</primary></indexterm><programlisting>typedef enum {
+	FPRINT_ERROR_CLAIM_DEVICE, /* developer didn't claim the device */
+	FPRINT_ERROR_ALREADY_IN_USE, /* device is already claimed by somebody else */
+	FPRINT_ERROR_INTERNAL, /* internal error occured */
+	FPRINT_ERROR_PERMISSION_DENIED, /* PolicyKit refused the action */
+	FPRINT_ERROR_NO_ENROLLED_PRINTS, /* No prints are enrolled */
+	FPRINT_ERROR_NO_ACTION_IN_PROGRESS, /* No actions currently in progress */
+	FPRINT_ERROR_INVALID_FINGERNAME, /* the finger name passed was invalid */
+	FPRINT_ERROR_NO_SUCH_DEVICE, /* device does not exist */
+} FprintError;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="FprintManager" role="typedef">
+<title>FprintManager</title>
+<indexterm zone="FprintManager"><primary>FprintManager</primary></indexterm><programlisting>typedef struct FprintManager FprintManager;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="FprintManagerClass" role="typedef">
+<title>FprintManagerClass</title>
+<indexterm zone="FprintManagerClass"><primary>FprintManagerClass</primary></indexterm><programlisting>typedef struct FprintManagerClass FprintManagerClass;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="fprint-manager-new" role="function">
+<title>fprint_manager_new ()</title>
+<indexterm zone="fprint-manager-new"><primary>fprint_manager_new</primary></indexterm><programlisting><link linkend="FprintManager">FprintManager</link>*      fprint_manager_new                  (<link linkend="gboolean">gboolean</link> no_timeout);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>no_timeout</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="FPRINT-TYPE-DEVICE:CAPS" role="macro">
+<title>FPRINT_TYPE_DEVICE</title>
+<indexterm zone="FPRINT-TYPE-DEVICE:CAPS"><primary>FPRINT_TYPE_DEVICE</primary></indexterm><programlisting>#define FPRINT_TYPE_DEVICE            (fprint_device_get_type())
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="FPRINT-DEVICE:CAPS" role="macro">
+<title>FPRINT_DEVICE()</title>
+<indexterm zone="FPRINT-DEVICE:CAPS"><primary>FPRINT_DEVICE</primary></indexterm><programlisting>#define FPRINT_DEVICE(object)         (G_TYPE_CHECK_INSTANCE_CAST((object), FPRINT_DEVICE_TYPE, FprintDevice))
+</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="FPRINT-DEVICE-CLASS:CAPS" role="macro">
+<title>FPRINT_DEVICE_CLASS()</title>
+<indexterm zone="FPRINT-DEVICE-CLASS:CAPS"><primary>FPRINT_DEVICE_CLASS</primary></indexterm><programlisting>#define FPRINT_DEVICE_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST((klass), FPRINT_DEVICE_TYPE, FprintDeviceClass))
+</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>klass</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="FPRINT-IS-DEVICE:CAPS" role="macro">
+<title>FPRINT_IS_DEVICE()</title>
+<indexterm zone="FPRINT-IS-DEVICE:CAPS"><primary>FPRINT_IS_DEVICE</primary></indexterm><programlisting>#define FPRINT_IS_DEVICE(object)      (G_TYPE_CHECK_INSTANCE_TYPE((object), FPRINT_TYPE_DEVICE))
+</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>object</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="FPRINT-IS-DEVICE-CLASS:CAPS" role="macro">
+<title>FPRINT_IS_DEVICE_CLASS()</title>
+<indexterm zone="FPRINT-IS-DEVICE-CLASS:CAPS"><primary>FPRINT_IS_DEVICE_CLASS</primary></indexterm><programlisting>#define FPRINT_IS_DEVICE_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass), FPRINT_TYPE_DEVICE))
+</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>klass</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="FPRINT-DEVICE-GET-CLASS:CAPS" role="macro">
+<title>FPRINT_DEVICE_GET_CLASS()</title>
+<indexterm zone="FPRINT-DEVICE-GET-CLASS:CAPS"><primary>FPRINT_DEVICE_GET_CLASS</primary></indexterm><programlisting>#define FPRINT_DEVICE_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS((obj), FPRINT_TYPE_DEVICE, FprintDeviceClass))
+</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>obj</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="FprintDevice" role="typedef">
+<title>FprintDevice</title>
+<indexterm zone="FprintDevice"><primary>FprintDevice</primary></indexterm><programlisting>typedef struct FprintDevice FprintDevice;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="FprintDeviceClass" role="typedef">
+<title>FprintDeviceClass</title>
+<indexterm zone="FprintDeviceClass"><primary>FprintDeviceClass</primary></indexterm><programlisting>typedef struct FprintDeviceClass FprintDeviceClass;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="fprint-device-new" role="function">
+<title>fprint_device_new ()</title>
+<indexterm zone="fprint-device-new"><primary>fprint_device_new</primary></indexterm><programlisting><link linkend="FprintDevice">FprintDevice</link>*       fprint_device_new                   (<link linkend="struct-fp-dscv-dev">struct fp_dscv_dev</link> *ddev);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>ddev</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="fprint-device-get-type" role="function">
+<title>fprint_device_get_type ()</title>
+<indexterm zone="fprint-device-get-type"><primary>fprint_device_get_type</primary></indexterm><programlisting><link linkend="GType">GType</link>               fprint_device_get_type              (void);</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara>
+
+
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2 id="dbus-glib-fprint-manager-object-info" role="variable">
+<title>dbus_glib_fprint_manager_object_info</title>
+<indexterm zone="dbus-glib-fprint-manager-object-info"><primary>dbus_glib_fprint_manager_object_info</primary></indexterm><programlisting>extern const DBusGObjectInfo dbus_glib_fprint_manager_object_info;
+</programlisting>
+<para>
+
+</para></refsect2>
+<refsect2 id="dbus-glib-fprint-device-object-info" role="variable">
+<title>dbus_glib_fprint_device_object_info</title>
+<indexterm zone="dbus-glib-fprint-device-object-info"><primary>dbus_glib_fprint_device_object_info</primary></indexterm><programlisting>extern const DBusGObjectInfo dbus_glib_fprint_device_object_info;
+</programlisting>
+<para>
+
+</para></refsect2>
+
+</refsect1>
+<refsect1 id="fprintd-fprintd.property-details" role="property_details">
+<title role="property_details.title">Property Details</title>
+<refsect2 id="FprintDevice--discovered-dev"><title>The <literal>&quot;discovered-dev&quot;</literal> property</title>
+<indexterm zone="FprintDevice--discovered-dev"><primary>FprintDevice:discovered-dev</primary></indexterm><programlisting>  &quot;discovered-dev&quot;           <link linkend="gpointer">gpointer</link>              : Write / Construct Only</programlisting>
+<para>Set discovered device construction property.</para></refsect2>
+<refsect2 id="FprintDevice--in-use"><title>The <literal>&quot;in-use&quot;</literal> property</title>
+<indexterm zone="FprintDevice--in-use"><primary>FprintDevice:in-use</primary></indexterm><programlisting>  &quot;in-use&quot;                   <link linkend="gboolean">gboolean</link>              : Read</programlisting>
+<para>Whether the device is currently in use.</para><para>Default value: FALSE</para>
+</refsect2>
+<refsect2 id="FprintDevice--name"><title>The <literal>&quot;name&quot;</literal> property</title>
+<indexterm zone="FprintDevice--name"><primary>FprintDevice:name</primary></indexterm><programlisting>  &quot;name&quot;                     <link linkend="gchar">gchar</link>*                : Read</programlisting>
+<para>The product name of the device.</para><para>Default value: NULL</para>
+</refsect2>
+<refsect2 id="FprintDevice--num-enroll-stages"><title>The <literal>&quot;num-enroll-stages&quot;</literal> property</title>
+<indexterm zone="FprintDevice--num-enroll-stages"><primary>FprintDevice:num-enroll-stages</primary></indexterm><programlisting>  &quot;num-enroll-stages&quot;        <link linkend="gint">gint</link>                  : Read</programlisting>
+<para>Number of enrollment stages for the device.</para><para>Allowed values: &gt;= G_MAXULONG</para>
+<para>Default value: -1</para>
+</refsect2>
+<refsect2 id="FprintDevice--scan-type"><title>The <literal>&quot;scan-type&quot;</literal> property</title>
+<indexterm zone="FprintDevice--scan-type"><primary>FprintDevice:scan-type</primary></indexterm><programlisting>  &quot;scan-type&quot;                <link linkend="gchar">gchar</link>*                : Read</programlisting>
+<para>The scan type of the device.</para><para>Default value: "press"</para>
+</refsect2>
+
+</refsect1>
+
+<refsect1 id="fprintd-fprintd.signal-details" role="signals">
+<title role="signals.title">Signal Details</title>
+<refsect2 id="FprintDevice-enroll-status"><title>The <literal>&quot;enroll-status&quot;</literal> signal</title>
+<indexterm zone="FprintDevice-enroll-status"><primary>FprintDevice::enroll-status</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="FprintDevice">FprintDevice</link> *fprintdevice,
+                                                        <link linkend="gchar">gchar</link>        *arg1,
+                                                        <link linkend="gboolean">gboolean</link>      arg2,
+                                                        <link linkend="gpointer">gpointer</link>      user_data)         : Run Last</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>fprintdevice</parameter>&nbsp;:</term>
+<listitem><simpara>the object which received the signal.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>arg1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>arg2</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2><refsect2 id="FprintDevice-verify-finger-selected"><title>The <literal>&quot;verify-finger-selected&quot;</literal> signal</title>
+<indexterm zone="FprintDevice-verify-finger-selected"><primary>FprintDevice::verify-finger-selected</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="FprintDevice">FprintDevice</link> *fprintdevice,
+                                                        <link linkend="gchar">gchar</link>        *arg1,
+                                                        <link linkend="gpointer">gpointer</link>      user_data)         : Run Last</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>fprintdevice</parameter>&nbsp;:</term>
+<listitem><simpara>the object which received the signal.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>arg1</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2><refsect2 id="FprintDevice-verify-status"><title>The <literal>&quot;verify-status&quot;</literal> signal</title>
+<indexterm zone="FprintDevice-verify-status"><primary>FprintDevice::verify-status</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="FprintDevice">FprintDevice</link> *fprintdevice,
+                                                        <link linkend="gchar">gchar</link>        *arg1,
+                                                        <link linkend="gboolean">gboolean</link>      arg2,
+                                                        <link linkend="gpointer">gpointer</link>      user_data)         : Run Last</programlisting>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>fprintdevice</parameter>&nbsp;:</term>
+<listitem><simpara>the object which received the signal.
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>arg1</parameter>&nbsp;:</term>
+<listitem><simpara>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>arg2</parameter>&nbsp;:</term>
+<listitem><simpara>
+
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+</refsect1>
+
+
+
+</refentry>

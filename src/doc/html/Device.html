@@ -1,0 +1,747 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>net.reactivated.Fprint.Device</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.74.0">
+<link rel="home" href="index.html" title="fprintd Reference Manual">
+<link rel="up" href="ref-dbus.html" title="D-Bus API Reference">
+<link rel="prev" href="Manager.html" title="net.reactivated.Fprint.Manager">
+<link rel="next" href="ix01.html" title="Index">
+<meta name="generator" content="GTK-Doc V1.10 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="reference" href="ref-dbus.html" title="D-Bus API Reference">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="appendix" href="license.html" title="Appendix A. License">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="Manager.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ref-dbus.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">fprintd Reference Manual</th>
+<td><a accesskey="n" href="ix01.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#Device.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#Device.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#Device.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
+                   | 
+                  <a href="#Device.properties" class="shortcut">Properties</a>
+                   | 
+                  <a href="#Device.signals" class="shortcut">Signals</a></nobr></td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="Device"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle">net.reactivated.Fprint.Device</span></h2>
+<p>net.reactivated.Fprint.Device — Device interface</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<h2>Methods</h2>
+<pre class="synopsis"><a class="link" href="Device.html#Device.ListEnrolledFingers">ListEnrolledFingers</a>   (in  's'  username,
+                       out 'as' enrolled_fingers)
+<a class="link" href="Device.html#Device.DeleteEnrolledFingers">DeleteEnrolledFingers</a> (in  's'  username)
+<a class="link" href="Device.html#Device.Claim">Claim</a>                 (in  's'  username)
+<a class="link" href="Device.html#Device.Release">Release</a>               ()
+<a class="link" href="Device.html#Device.VerifyStart">VerifyStart</a>           (in  's'  finger_name)
+<a class="link" href="Device.html#Device.VerifyStop">VerifyStop</a>            ()
+<a class="link" href="Device.html#Device.EnrollStart">EnrollStart</a>           (in  's'  finger_name)
+<a class="link" href="Device.html#Device.EnrollStop">EnrollStop</a>            ()
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id489241"></a><h2>Signals</h2>
+<pre class="synopsis"><a class="link" href="Device.html#Device::VerifyFingerSelected">VerifyFingerSelected</a> ('s' finger_name)
+<a class="link" href="Device.html#Device::VerifyStatus">VerifyStatus</a>         ('s' result,
+                      'b' done)
+<a class="link" href="Device.html#Device::EnrollStatus">EnrollStatus</a>         ('s' result,
+                      'b' done)
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id460172"></a><h2>Implemented Interfaces</h2>
+<p>
+    Objects implementing net.reactivated.Fprint.Device also implements
+    org.freedesktop.DBus.Introspectable,
+    org.freedesktop.DBus.Properties
+    </p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id460622"></a><h2>Properties</h2>
+<pre class="synopsis"><a class="link" href="Device.html#Device:name">'name'</a>              read      's'
+<a class="link" href="Device.html#Device:num-enroll-stages">'num-enroll-stages'</a> read      'i'
+<a class="link" href="Device.html#Device:scan-type">'scan-type'</a>         read      's'
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="id460657"></a><h2>Description</h2>
+<p>
+			</p>
+<div class="refsect2" lang="en">
+<a name="id460670"></a><h3>
+<a name="polkit-integration"></a>
+				PolicyKit integration
+			</h3>
+</div>
+<p>
+			</p>
+<p>
+				fprintd uses PolicyKit to check whether users are allowed to access fingerprint data, or the
+				fingerprint readers itself.
+				</p>
+<div class="itemizedlist"><ul type="disc">
+<li>
+<span class="bold"><strong>net.reactivated.fprint.device.verify: </strong></span>
+							Whether the user is allowed to verify fingers against saved fingerprints.
+						</li>
+<li>
+<span class="bold"><strong>net.reactivated.fprint.device.enroll: </strong></span>
+							Whether the user is allowed to enroll new fingerprints.
+						</li>
+<li>
+<span class="bold"><strong>net.reactivated.fprint.device.setusername: </strong></span>
+							Whether the user is allowed to query, verify, or enroll fingerprints for users other than itself.
+						</li>
+</ul></div>
+<p>
+			</p>
+<p>
+
+			</p>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id466591"></a><h3>
+<a name="usernames"></a>
+				Usernames
+			</h3>
+</div>
+<p>
+			</p>
+<p>
+				When a username argument is used for a method, a PolicyKit check is done on the
+				<code class="literal">net.reactivated.fprint.device.setusername</code> PolicyKit
+				action to see whether the user the client is running as is allowed to access data from other users.
+			</p>
+<p>
+			</p>
+<p>
+				By default, only root is allowed to access fingerprint data for users other than itself. For a normal user,
+				it is recommended that you use an empty string for the username, which will mean "the client the user is
+				running as".
+			</p>
+<p>
+			</p>
+<p>
+				See <a class="link" href="Device.html#polkit-integration">PolicyKit integration</a>.
+			</p>
+<p>
+
+			</p>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id466630"></a><h3>
+<a name="fingerprint-names"></a>
+				Fingerprint names
+			</h3>
+</div>
+<p>
+			</p>
+<p>
+				When a finger name argument is used for a method, it refers to either a single finger, or
+				"any" finger. See the list of possible values below:
+				</p>
+<div class="itemizedlist"><ul type="disc">
+<li>
+<span class="bold"><strong>left-thumb: </strong></span>
+							Left thumb
+						</li>
+<li>
+<span class="bold"><strong>left-index-finger: </strong></span>
+							Left index finger
+						</li>
+<li>
+<span class="bold"><strong>left-middle-finger: </strong></span>
+							Left middle finger
+						</li>
+<li>
+<span class="bold"><strong>left-ring-finger: </strong></span>
+							Left ring finger
+						</li>
+<li>
+<span class="bold"><strong>left-little-finger: </strong></span>
+							Left little finger
+						</li>
+<li>
+<span class="bold"><strong>right-thumb: </strong></span>
+							Right thumb
+						</li>
+<li>
+<span class="bold"><strong>right-index-finger: </strong></span>
+							Right index finger
+						</li>
+<li>
+<span class="bold"><strong>right-middle-finger: </strong></span>
+							Right middle finger
+						</li>
+<li>
+<span class="bold"><strong>right-ring-finger: </strong></span>
+							Right ring finger
+						</li>
+<li>
+<span class="bold"><strong>right-little-finger: </strong></span>
+							Right little finger
+						</li>
+<li>
+<span class="bold"><strong>any: </strong></span>
+							Any finger. This is only used for <a class="link" href="Device.html#Device.VerifyStart"><code class="function">Device.VerifyStart</code></a>
+							(select the first finger with a fingerprint associated, or all the fingerprints available for the user when
+							the device supports it) and <a class="link" href="Device.html#Device::VerifyFingerSelected"><code class="literal">Device::VerifyFingerSelected</code></a>
+							(any finger with an associated fingerprint can be used).
+						</li>
+</ul></div>
+<p>
+			</p>
+<p>
+
+			</p>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id476586"></a><h3>
+<a name="verify-statuses"></a>
+				Verify Statuses
+			</h3>
+</div>
+<p>
+			</p>
+<p>
+				</p>
+<div class="itemizedlist"><ul type="disc">
+<li>
+<span class="bold"><strong>verify-no-match: </strong></span>
+							The verification did not match, <a class="link" href="Device.html#Device.VerifyStop"><code class="function">Device.VerifyStop</code></a> should now be called.
+						</li>
+<li>
+<span class="bold"><strong>verify-match: </strong></span>
+							The verification succeeded, <a class="link" href="Device.html#Device.VerifyStop"><code class="function">Device.VerifyStop</code></a> should now be called.
+						</li>
+<li>
+<span class="bold"><strong>verify-retry-scan: </strong></span>
+							The user should retry scanning their finger, the verification is still ongoing.
+						</li>
+<li>
+<span class="bold"><strong>verify-swipe-too-short: </strong></span>
+							The user's swipe was too short. The user should retry scanning their finger, the verification is still ongoing.
+						</li>
+<li>
+<span class="bold"><strong>verify-finger-not-centered: </strong></span>
+							The user's finger was not centered on the reader. The user should retry scanning their finger, the verification is still ongoing.
+						</li>
+<li>
+<span class="bold"><strong>verify-remove-and-retry: </strong></span>
+							The user should remove their finger from the reader and retry scanning their finger, the verification is still ongoing.
+						</li>
+<li>
+<span class="bold"><strong>verify-unknown-error: </strong></span>
+							An unknown error occurred (usually a driver problem), <a class="link" href="Device.html#Device.VerifyStop"><code class="function">Device.VerifyStop</code></a> should now be called.
+						</li>
+</ul></div>
+<p>
+			</p>
+<p>
+
+			</p>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id454676"></a><h3>
+<a name="enroll-statuses"></a>
+				Enroll Statuses
+			</h3>
+</div>
+<p>
+			</p>
+<p>
+				</p>
+<div class="itemizedlist"><ul type="disc">
+<li>
+<span class="bold"><strong>enroll-completed: </strong></span>
+							The enrollment successfully completed, <a class="link" href="Device.html#Device.EnrollStop"><code class="function">Device.EnrollStop</code></a> should now be called.
+						</li>
+<li>
+<span class="bold"><strong>enroll-failed: </strong></span>
+							The enrollment failed, <a class="link" href="Device.html#Device.EnrollStop"><code class="function">Device.EnrollStop</code></a> should now be called.
+						</li>
+<li>
+<span class="bold"><strong>enroll-stage-passed: </strong></span>
+							One stage of the enrollment passed, the enrollment is still ongoing.
+						</li>
+<li>
+<span class="bold"><strong>enroll-retry-scan: </strong></span>
+							The user should retry scanning their finger, the enrollment is still ongoing.
+						</li>
+<li>
+<span class="bold"><strong>enroll-swipe-too-short: </strong></span>
+							The user's swipe was too short. The user should retry scanning their finger, the enrollment is still ongoing.
+						</li>
+<li>
+<span class="bold"><strong>enroll-finger-not-centered: </strong></span>
+							The user's finger was not centered on the reader. The user should retry scanning their finger, the enrollment is still ongoing.
+						</li>
+<li>
+<span class="bold"><strong>enroll-remove-and-retry: </strong></span>
+							The user should remove their finger from the reader and retry scanning their finger, the enrollment is still ongoing.
+						</li>
+<li>
+<span class="bold"><strong>enroll-unknown-error: </strong></span>
+							An unknown error occurred (usually a driver problem), <a class="link" href="Device.html#Device.EnrollStop"><code class="function">Device.EnrollStop</code></a> should now be called.
+
+						</li>
+</ul></div>
+<p>
+			</p>
+<p>
+		</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id454787"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="id454795"></a><h3>
+<a name="Device.ListEnrolledFingers"></a>ListEnrolledFingers ()</h3>
+<pre class="programlisting">ListEnrolledFingers (in  's'  username,
+                     out 'as' enrolled_fingers)</pre>
+</div>
+<p>
+						List all the enrolled fingerprints for the chosen user.
+					</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>username</code></em>:</span></p></td>
+<td>The username for whom to list the enrolled fingerprints. See <a class="link" href="Device.html#usernames">Usernames</a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>enrolled_fingers</code></em>:</span></p></td>
+<td>An array of strings representing the enrolled fingerprints. See <a class="link" href="Device.html#fingerprint-names">Fingerprint names</a>.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="refsect3" lang="en">
+<a name="id454863"></a><h4>Errors</h4>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.PermissionDenied</code></em>:</span></p></td>
+<td>if the caller lacks the appropriate PolicyKit authorization</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.NoEnrolledPrints</code></em>:</span></p></td>
+<td>if the chosen user doesn't have any fingerprints enrolled</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id454893"></a><h3>
+<a name="Device.DeleteEnrolledFingers"></a>DeleteEnrolledFingers ()</h3>
+<pre class="programlisting">DeleteEnrolledFingers (in  's' username)</pre>
+</div>
+<p>
+						Delete all the enrolled fingerprints for the chosen user.
+					</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>username</code></em>:</span></p></td>
+<td>The username for whom to delete the enrolled fingerprints. See <a class="link" href="Device.html#usernames">Usernames</a>.</td>
+</tr></tbody>
+</table></div>
+<div class="refsect3" lang="en">
+<a name="id454942"></a><h4>Errors</h4>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.PermissionDenied</code></em>:</span></p></td>
+<td>if the caller lacks the appropriate PolicyKit authorization</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id454960"></a><h3>
+<a name="Device.Claim"></a>Claim ()</h3>
+<pre class="programlisting">Claim (in  's' username)</pre>
+</div>
+<p>
+						Claim the device for the chosen user.
+					</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>username</code></em>:</span></p></td>
+<td>The username for whom to claim the device. See <a class="link" href="Device.html#usernames">Usernames</a>.</td>
+</tr></tbody>
+</table></div>
+<div class="refsect3" lang="en">
+<a name="id455008"></a><h4>Errors</h4>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.PermissionDenied</code></em>:</span></p></td>
+<td>if the caller lacks the appropriate PolicyKit authorization</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.AlreadyInUse</code></em>:</span></p></td>
+<td>if the device is already claimed</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.Internal</code></em>:</span></p></td>
+<td>if the device couldn't be claimed</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id455050"></a><h3>
+<a name="Device.Release"></a>Release ()</h3>
+<pre class="programlisting">Release ()</pre>
+</div>
+<p>
+						Release a device claimed with <a class="link" href="Device.html#Device.Claim"><code class="function">Device.Claim</code></a>.
+					</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody></tbody>
+</table></div>
+<div class="refsect3" lang="en">
+<a name="id455090"></a><h4>Errors</h4>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.PermissionDenied</code></em>:</span></p></td>
+<td>if the caller lacks the appropriate PolicyKit authorization</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.ClaimDevice</code></em>:</span></p></td>
+<td>if the device was not claimed</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id455120"></a><h3>
+<a name="Device.VerifyStart"></a>VerifyStart ()</h3>
+<pre class="programlisting">VerifyStart (in  's' finger_name)</pre>
+</div>
+<p>
+						Check the chosen finger against a saved fingerprint. You need to have claimed the device using
+						<a class="link" href="Device.html#Device.Claim"><code class="function">Device.Claim</code></a>. The finger selected is sent to the front-end
+						using <a class="link" href="Device.html#Device::VerifyFingerSelected"><code class="literal">Device::VerifyFingerSelected</code></a> and
+						verification status through <a class="link" href="Device.html#Device::VerifyStatus"><code class="literal">Device::VerifyStatus</code></a>.
+					</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>finger_name</code></em>:</span></p></td>
+<td>A string representing the finger to verify. See <a class="link" href="Device.html#fingerprint-names">Fingerprint names</a>.</td>
+</tr></tbody>
+</table></div>
+<div class="refsect3" lang="en">
+<a name="id455197"></a><h4>Errors</h4>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.PermissionDenied</code></em>:</span></p></td>
+<td>if the caller lacks the appropriate PolicyKit authorization</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.ClaimDevice</code></em>:</span></p></td>
+<td>if the device was not claimed</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.AlreadyInUse</code></em>:</span></p></td>
+<td>if the device was already being used</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.NoEnrolledPrints</code></em>:</span></p></td>
+<td>if there are no enrolled prints for the chosen user</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.Internal</code></em>:</span></p></td>
+<td>if there was an internal error</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id455262"></a><h3>
+<a name="Device.VerifyStop"></a>VerifyStop ()</h3>
+<pre class="programlisting">VerifyStop ()</pre>
+</div>
+<p>
+						Stop an on-going fingerprint verification started with <a class="link" href="Device.html#Device.VerifyStart"><code class="function">Device.VerifyStart</code></a>.
+					</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody></tbody>
+</table></div>
+<div class="refsect3" lang="en">
+<a name="id455302"></a><h4>Errors</h4>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.PermissionDenied</code></em>:</span></p></td>
+<td>if the caller lacks the appropriate PolicyKit authorization</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.ClaimDevice</code></em>:</span></p></td>
+<td>if the device was not claimed</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.NoActionInProgress</code></em>:</span></p></td>
+<td>if there was no ongoing verification</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.Internal</code></em>:</span></p></td>
+<td>if there was an internal error</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id455355"></a><h3>
+<a name="Device.EnrollStart"></a>EnrollStart ()</h3>
+<pre class="programlisting">EnrollStart (in  's' finger_name)</pre>
+</div>
+<p>
+						Start enrollemnt for the selected finger. You need to have claimed the device using
+						<a class="link" href="Device.html#Device.Claim"><code class="function">Device.Claim</code></a> before calling
+						this method. Enrollment status is sent through <a class="link" href="Device.html#Device::EnrollStatus"><code class="literal">Device::EnrollStatus</code></a>.
+					</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>finger_name</code></em>:</span></p></td>
+<td>A string representing the finger to enroll. See
+				<a class="link" href="Device.html#fingerprint-names">Fingerprint names</a>.
+				Note that "any" is not a valid finger name for this method.</td>
+</tr></tbody>
+</table></div>
+<div class="refsect3" lang="en">
+<a name="id455424"></a><h4>Errors</h4>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.PermissionDenied</code></em>:</span></p></td>
+<td>if the caller lacks the appropriate PolicyKit authorization</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.ClaimDevice</code></em>:</span></p></td>
+<td>if the device was not claimed</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.AlreadyInUse</code></em>:</span></p></td>
+<td>if the device was already being used</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.InvalidFingername</code></em>:</span></p></td>
+<td>if there are no enrolled prints for the chosen user</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.Internal</code></em>:</span></p></td>
+<td>if there was an internal error</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id455488"></a><h3>
+<a name="Device.EnrollStop"></a>EnrollStop ()</h3>
+<pre class="programlisting">EnrollStop ()</pre>
+</div>
+<p>
+						Stop an on-going fingerprint enrollment started with <a class="link" href="Device.html#Device.EnrollStart"><code class="function">Device.EnrollStart</code></a>.
+					</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody></tbody>
+</table></div>
+<div class="refsect3" lang="en">
+<a name="id455528"></a><h4>Errors</h4>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.PermissionDenied</code></em>:</span></p></td>
+<td>if the caller lacks the appropriate PolicyKit authorization</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.ClaimDevice</code></em>:</span></p></td>
+<td>if the device was not claimed</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.NoActionInProgress</code></em>:</span></p></td>
+<td>if there was no ongoing verification</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>net.reactivated.Fprint.Error.Internal</code></em>:</span></p></td>
+<td>if there was an internal error</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="id455583"></a><h2>Signal Details</h2>
+<div class="refsect2" lang="en">
+<a name="id455594"></a><h3>
+<a name="Device::VerifyFingerSelected"></a>The VerifyFingerSelected signal</h3>
+<pre class="programlisting">VerifyFingerSelected ('s' finger_name)</pre>
+</div>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>finger_name</code></em>:</span></p></td>
+<td>
+						
+							A string representing the finger select to be verified.
+						
+					</td>
+</tr></tbody>
+</table></div>
+<p>
+See also:
+
+					<a class="link" href="Device.html#fingerprint-names">Fingerprint names</a>.
+				</p>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id455662"></a><h3>
+<a name="Device::VerifyStatus"></a>The VerifyStatus signal</h3>
+<pre class="programlisting">VerifyStatus ('s' result,
+              'b' done)</pre>
+</div>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>result</code></em>:</span></p></td>
+<td>
+						A string representing the status of the verification.
+					</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>done</code></em>:</span></p></td>
+<td>
+						Whether the verification finished and can be stopped.
+					</td>
+</tr>
+</tbody>
+</table></div>
+<p>
+See also:
+
+					<a class="link" href="Device.html#verify-statuses">Verify Statuses</a> and <a class="link" href="Device.html#Device.VerifyStop"><code class="function">Device.VerifyStop</code></a>.
+				</p>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id455760"></a><h3>
+<a name="Device::EnrollStatus"></a>The EnrollStatus signal</h3>
+<pre class="programlisting">EnrollStatus ('s' result,
+              'b' done)</pre>
+</div>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>result</code></em>:</span></p></td>
+<td>
+						A string representing the status of the enrollment.
+					</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>done</code></em>:</span></p></td>
+<td>
+						Whether the enrollment finished and can be stopped.
+					</td>
+</tr>
+</tbody>
+</table></div>
+<p>
+See also:
+
+					<a class="link" href="Device.html#enroll-statuses">Enrollment Statuses</a> and <a class="link" href="Device.html#Device.EnrollStop"><code class="function">Device.EnrollStop</code></a>.
+				</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="id455858"></a><h2>Property Details</h2>
+<div class="refsect2" lang="en">
+<a name="id455866"></a><h3>
+<a name="Device:name"></a>The "name" property</h3>
+<pre class="programlisting">'name'  read      's'
+</pre>
+</div>
+<p>
+						The product name of the device.
+					</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody></tbody>
+</table></div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id455897"></a><h3>
+<a name="Device:num-enroll-stages"></a>The "num-enroll-stages" property</h3>
+<pre class="programlisting">'num-enroll-stages'  read      'i'
+</pre>
+</div>
+<p>
+						The number of enrollment stages for the device. This is only available when the device has been claimed, otherwise it will be undefined (-1).
+					</p>
+<p>
+See also:
+
+						<a class="link" href="Device.html#Device.Claim"><code class="function">Device.Claim</code></a> and <a class="link" href="Device.html#Device.EnrollStart"><code class="function">Device.EnrollStart</code></a>.
+					</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody></tbody>
+</table></div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id455951"></a><h3>
+<a name="Device:scan-type"></a>The "scan-type" property</h3>
+<pre class="programlisting">'scan-type'  read      's'
+</pre>
+</div>
+<p>
+						The scan type of the device, either "press" if you place your finger on the device, or "swipe" if you have to swipe your finger.
+					</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody></tbody>
+</table></div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.10</div>
+</body>
+</html>
