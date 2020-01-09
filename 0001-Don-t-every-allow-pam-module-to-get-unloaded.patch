@@ -1,0 +1,30 @@
+From 5d50d29c6739ad518839a473215eb7e845aaaca7 Mon Sep 17 00:00:00 2001
+From: Ray Strode <rstrode@redhat.com>
+Date: Tue, 9 Nov 2010 11:32:31 -0500
+Subject: [PATCH] Don't every allow pam module to get unloaded
+
+The PAM module uses dbus-glib, static gobject types, etc,
+so it really can't get unloaded.
+
+This commit adds some linker-fu to keep it resident even
+after the pam module closes.
+---
+ pam/Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pam/Makefile.am b/pam/Makefile.am
+index 20217b1..98723ac 100644
+--- a/pam/Makefile.am
++++ b/pam/Makefile.am
+@@ -5,7 +5,7 @@ pammoddir=$(libdir)/security
+ 
+ pam_fprintd_la_SOURCES = pam_fprintd.c $(MARSHALFILES)
+ pam_fprintd_la_CFLAGS = -fPIC $(WARN_CFLAGS) $(GLIB_CFLAGS)
+-pam_fprintd_la_LDFLAGS = -avoid-version -module
++pam_fprintd_la_LDFLAGS = -avoid-version -module -module -Wl,-z,nodelete
+ pam_fprintd_la_LIBADD = $(PAM_LIBS) $(GLIB_LIBS)
+ 
+ MARSHALFILES = marshal.c marshal.h
+-- 
+1.8.3.1
+

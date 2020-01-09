@@ -3,7 +3,7 @@
 
 Name:		fprintd
 Version:	0.1
-Release:	20.git%{short_hash}%{?dist}
+Release:	21.git%{short_hash}%{?dist}
 Summary:	D-Bus service for Fingerprint reader access
 
 Group:		System Environment/Daemons
@@ -25,6 +25,8 @@ Patch4:		0001-Add-man-page-for-the-command-line-utilities.patch
 Patch5:         dont-call-g-source-remove.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=665837
 Patch6:		0001-Change-g_errors-to-g_warnings.patch
+# https://bugzilla.redhat.com/show_bug.cgi?id=1003940
+Patch7:		0001-Don-t-every-allow-pam-module-to-get-unloaded.patch
 
 Url:		http://www.reactivated.net/fprint/wiki/Fprintd
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -71,6 +73,7 @@ fingerprint readers access.
 %patch4 -p1 -b .man
 %patch5 -p1 -b .dont-call-g-source-remove
 %patch6 -p1 -b .gerror
+%patch7 -p1 -b .never-unload
 
 autoreconf -i -f
 
@@ -114,6 +117,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/interfaces/net.reactivated.Fprint.Manager.xml
 
 %changelog
+* Mon Sep 30 2013 Bastien Nocera <bnocera@redhat.com> 0.1-21.git04fd09cfa
+- Fix possible crasher when PAM module gets unloaded
+  Resolves: #1003940
+
 * Mon Sep 19 2011 Bastien Nocera <bnocera@redhat.com> 0.1-20.git04fd09cfa
 - Don't use g_error() and abort when there's no USB devices
   Resolves: #665837
