@@ -3,7 +3,7 @@
 
 Name:		fprintd
 Version:	0.1
-Release:	21.git%{short_hash}%{?dist}
+Release:	22.git%{short_hash}%{?dist}
 Summary:	D-Bus service for Fingerprint reader access
 
 Group:		System Environment/Daemons
@@ -27,6 +27,8 @@ Patch5:         dont-call-g-source-remove.patch
 Patch6:		0001-Change-g_errors-to-g_warnings.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=1003940
 Patch7:		0001-Don-t-every-allow-pam-module-to-get-unloaded.patch
+
+Patch8: 0001-pam-Fix-eventfd-leak.patch
 
 Url:		http://www.reactivated.net/fprint/wiki/Fprintd
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -74,6 +76,7 @@ fingerprint readers access.
 %patch5 -p1 -b .dont-call-g-source-remove
 %patch6 -p1 -b .gerror
 %patch7 -p1 -b .never-unload
+%patch8 -p1
 
 autoreconf -i -f
 
@@ -117,6 +120,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/interfaces/net.reactivated.Fprint.Manager.xml
 
 %changelog
+* Fri Sep 26 2014 Bastien Nocera <bnocera@redhat.com> 0.1-22.git04fd09cfa
+- Fix eventfd leak
+Resolves: #1024825
+
 * Mon Sep 30 2013 Bastien Nocera <bnocera@redhat.com> 0.1-21.git04fd09cfa
 - Fix possible crasher when PAM module gets unloaded
   Resolves: #1003940
