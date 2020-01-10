@@ -1,6 +1,6 @@
 Name:		fprintd
 Version:	0.5.0
-Release:	1%{?dist}
+Release:	3%{?dist}
 Summary:	D-Bus service for Fingerprint reader access
 
 Group:		System Environment/Daemons
@@ -18,6 +18,8 @@ BuildRequires:	gtk-doc
 BuildRequires:	intltool
 BuildRequires:  autoconf automake libtool
 BuildRequires:	perl-podlators
+
+Patch0:		0001-data-Fix-syntax-error-in-fprintd.pod.patch
 
 %description
 D-Bus service to access fingerprint readers.
@@ -50,6 +52,7 @@ fingerprint readers access.
 
 %prep
 %setup -q -n %{name}-%{version}
+%patch0 -p1
 
 %build
 %configure --libdir=/%{_lib}/ --enable-gtk-doc --enable-pam
@@ -94,6 +97,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/interfaces/net.reactivated.Fprint.Manager.xml
 
 %changelog
+* Mon Jan 06 2014 Bastien Nocera <bnocera@redhat.com> 0.5.0-3
+- Fix build with strict pod2man
+Resolves: #1048858
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 0.5.0-2
+- Mass rebuild 2013-12-27
+
 * Tue Mar 05 2013 Bastien Nocera <bnocera@redhat.com> 0.5.0-1
 - Update to 0.5.0
 
