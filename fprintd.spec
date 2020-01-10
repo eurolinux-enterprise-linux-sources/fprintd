@@ -1,6 +1,6 @@
 Name:		fprintd
 Version:	0.5.0
-Release:	3%{?dist}
+Release:	4.0%{?dist}
 Summary:	D-Bus service for Fingerprint reader access
 
 Group:		System Environment/Daemons
@@ -20,6 +20,7 @@ BuildRequires:  autoconf automake libtool
 BuildRequires:	perl-podlators
 
 Patch0:		0001-data-Fix-syntax-error-in-fprintd.pod.patch
+Patch1:		0001-pam-Fix-eventfd-leak.patch
 
 %description
 D-Bus service to access fingerprint readers.
@@ -53,6 +54,7 @@ fingerprint readers access.
 %prep
 %setup -q -n %{name}-%{version}
 %patch0 -p1
+%patch1 -p1
 
 %build
 %configure --libdir=/%{_lib}/ --enable-gtk-doc --enable-pam
@@ -97,6 +99,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/interfaces/net.reactivated.Fprint.Manager.xml
 
 %changelog
+* Mon May 12 2014 Bastien Nocera <bnocera@redhat.com> 0.5.0-4.0
+- Bump revision
+Resolves: #1050827
+
+* Mon May 12 2014 Bastien Nocera <bnocera@redhat.com> 0.5.0-4
+- Fix single eventfd leak for each iteration
+Resolves: #1050827
+
 * Mon Jan 06 2014 Bastien Nocera <bnocera@redhat.com> 0.5.0-3
 - Fix build with strict pod2man
 Resolves: #1048858
