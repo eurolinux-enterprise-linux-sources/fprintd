@@ -21,6 +21,7 @@
 #include <config.h>
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <string.h>
@@ -39,8 +40,11 @@
 
 #include "fingerprint-strings.h"
 
-#define MAX_TRIES 3
-#define TIMEOUT 30
+#define DEFAULT_MAX_TRIES 3
+#define DEFAULT_TIMEOUT 30
+
+#define MAX_TRIES_MATCH "max-tries="
+#define TIMEOUT_MATCH "timeout="
 
 #define D(pamh, ...) {					\
 	if (debug) {					\
@@ -53,6 +57,8 @@
 
 
 static gboolean debug = FALSE;
+static guint max_tries = DEFAULT_MAX_TRIES;
+static guint timeout = DEFAULT_TIMEOUT;
 
 static gboolean send_info_msg(pam_handle_t *pamh, const char *msg)
 {
@@ -164,9 +170,20 @@ static void close_and_unref (DBusGConnection *connection)
 	dbus_g_connection_unref (connection);
 }
 
+static void unref_loop (GMainLoop *loop)
+{
+	GMainContext *ctx;
+
+	/* The main context was created separately, so
+	 * we'll need to unref it ourselves */
+	ctx = g_main_loop_get_context (loop);
+	g_main_loop_unref (loop);
+	g_main_context_unref (ctx);
+}
+
 #define DBUS_TYPE_G_OBJECT_PATH_ARRAY (dbus_g_type_get_collection ("GPtrArray", DBUS_TYPE_G_OBJECT_PATH))
 
-static DBusGProxy *open_device(pam_handle_t *pamh, DBusGConnection *connection, DBusGProxy *manager, const char *username, gboolean *has_multiple_devices)
+static DBusGProxy *open_device(pam_handle_t *pamh, DBusGConnection *connection, DBusGProxy *manager, gboolean *has_multiple_devices)
 {
 	GError *error = NULL;
 	const char *path;
@@ -199,13 +216,6 @@ static DBusGProxy *open_device(pam_handle_t *pamh, DBusGConnection *connection, 
 					"net.reactivated.Fprint",
 					path,
 					"net.reactivated.Fprint.Device");
-
-	if (!dbus_g_proxy_call (dev, "Claim", &error, G_TYPE_STRING, username, G_TYPE_INVALID, G_TYPE_INVALID)) {
-		D(pamh, "failed to claim device '%s': %s\n", path, error->message);
-		g_error_free (error);
-		g_object_unref (dev);
-		dev = NULL;
-	}
 
 	g_ptr_array_free (paths_array, TRUE);
 
@@ -271,7 +281,7 @@ static int do_verify(GMainLoop *loop, pam_handle_t *pamh, DBusGProxy *dev, gbool
 	int ret;
 
 	data = g_new0 (verify_data, 1);
-	data->max_tries = MAX_TRIES;
+	data->max_tries = max_tries;
 	data->pamh = pamh;
 	data->loop = loop;
 
@@ -304,13 +314,16 @@ static int do_verify(GMainLoop *loop, pam_handle_t *pamh, DBusGProxy *dev, gbool
 		GSource *source;
 
 		/* Set up the timeout on our non-default context */
-		source = g_timeout_source_new_seconds (TIMEOUT);
+		source = g_timeout_source_new_seconds (timeout);
 		g_source_attach (source, g_main_loop_get_context (loop));
 		g_source_set_callback (source, verify_timeout_cb, data, NULL);
 
 		data->timed_out = FALSE;
 
 		if (!dbus_g_proxy_call (dev, "VerifyStart", &error, G_TYPE_STRING, "any", G_TYPE_INVALID, G_TYPE_INVALID)) {
+			if (dbus_g_error_has_name(error, "net.reactivated.Fprint.Error.NoEnrolledPrints"))
+				ret = PAM_USER_UNKNOWN;
+
 			D(pamh, "VerifyStart failed: %s", error->message);
 			g_error_free (error);
 
@@ -363,6 +376,26 @@ static int do_verify(GMainLoop *loop, pam_handle_t *pamh, DBusGProxy *dev, gbool
 	return ret;
 }
 
+static gboolean user_has_prints(DBusGProxy *dev, const char *username)
+{
+	char **fingers;
+	gboolean have_prints;
+
+	if (!dbus_g_proxy_call (dev, "ListEnrolledFingers", NULL,
+				G_TYPE_STRING, username, G_TYPE_INVALID,
+				G_TYPE_STRV, &fingers, G_TYPE_INVALID)) {
+		/* If ListEnrolledFingers fails then verification should
+		 * also fail (both use the same underlying call), so we
+		 * report FALSE here and bail out early.  */
+		return FALSE;
+	}
+
+	have_prints = fingers != NULL && g_strv_length (fingers) > 0;
+	g_strfreev (fingers);
+
+	return have_prints;
+}
+
 static void release_device(pam_handle_t *pamh, DBusGProxy *dev)
 {
 	GError *error = NULL;
@@ -372,30 +405,52 @@ static void release_device(pam_handle_t *pamh, DBusGProxy *dev)
 	}
 }
 
+static gboolean claim_device(pam_handle_t *pamh, DBusGProxy *dev, const char *username)
+{
+	GError *error = NULL;
+
+	if (!dbus_g_proxy_call (dev, "Claim", &error, G_TYPE_STRING, username, G_TYPE_INVALID, G_TYPE_INVALID)) {
+		D(pamh, "failed to claim device %s\n", error->message);
+		g_error_free (error);
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
 static int do_auth(pam_handle_t *pamh, const char *username)
 {
 	DBusGProxy *manager;
 	DBusGConnection *connection;
 	DBusGProxy *dev;
 	GMainLoop *loop;
+	gboolean have_prints;
 	gboolean has_multiple_devices;
-	int ret;
+	int ret = PAM_AUTHINFO_UNAVAIL;
 
 	manager = create_manager (pamh, &connection, &loop);
 	if (manager == NULL)
 		return PAM_AUTHINFO_UNAVAIL;
 
-	dev = open_device(pamh, connection, manager, username, &has_multiple_devices);
+	dev = open_device(pamh, connection, manager, &has_multiple_devices);
 	g_object_unref (manager);
 	if (!dev) {
-		g_main_loop_unref (loop);
+		unref_loop (loop);
 		close_and_unref (connection);
 		return PAM_AUTHINFO_UNAVAIL;
 	}
-	ret = do_verify(loop, pamh, dev, has_multiple_devices);
 
-	g_main_loop_unref (loop);
-	release_device(pamh, dev);
+	have_prints = user_has_prints(dev, username);
+	D(pamh, "prints registered: %s\n", have_prints ? "yes" : "no");
+
+	if (have_prints) {
+		if (claim_device (pamh, dev, username)) {
+			ret = do_verify (loop, pamh, dev, has_multiple_devices);
+			release_device (pamh, dev);
+		}
+	}
+
+	unref_loop (loop);
 	g_object_unref (dev);
 	close_and_unref (connection);
 
@@ -413,7 +468,9 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int flags, int argc,
 	bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
-	g_type_init ();
+#if !GLIB_CHECK_VERSION (2, 36, 0)
+	g_type_init();
+#endif
 
 	dbus_g_object_register_marshaller (fprintd_marshal_VOID__STRING_BOOLEAN,
 					   G_TYPE_NONE, G_TYPE_STRING, G_TYPE_BOOLEAN, G_TYPE_INVALID);
@@ -429,9 +486,23 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int flags, int argc,
 		return PAM_AUTHINFO_UNAVAIL;
 
 	for (i = 0; i < argc; i++) {
-		if (argv[i] != NULL && g_str_equal (argv[i], "debug")) {
-			g_message ("debug on");
-			debug = TRUE;
+		if (argv[i] != NULL) {
+			if(g_str_equal (argv[i], "debug")) {
+				g_message ("debug on");
+				debug = TRUE;
+			}
+			else if (strncmp(argv[i], MAX_TRIES_MATCH, strlen (MAX_TRIES_MATCH)) == 0 && strlen(argv[i]) == strlen (MAX_TRIES_MATCH) + 1) {
+				max_tries = atoi (argv[i] + strlen (MAX_TRIES_MATCH));
+				if (max_tries < 1)
+					max_tries = DEFAULT_MAX_TRIES;
+				D(pamh, "max_tries specified as: %d", max_tries);
+			}
+			else if (strncmp(argv[i], TIMEOUT_MATCH, strlen (TIMEOUT_MATCH)) == 0 && strlen(argv[i]) <= strlen (TIMEOUT_MATCH) + 2) {
+				timeout = atoi (argv[i] + strlen (TIMEOUT_MATCH));
+				if (timeout < 10)
+					timeout = DEFAULT_TIMEOUT;
+				D(pamh, "timeout specified as: %d", timeout);
+			}
 		}
 	}
 

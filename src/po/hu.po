@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Gabor Kelemen <kelemeng at gnome dot hu>, 2012.
+# Gabor Kelemen <kelemeng at gnome dot hu>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: fprintd\n"
-"Report-Msgid-Bugs-To: https://bugs.freedesktop.org/enter_bug.cgi?product=libfprint\n"
-"POT-Creation-Date: 2012-02-08 12:50+0000\n"
-"PO-Revision-Date: 2012-09-03 12:34+0000\n"
-"Last-Translator: kelemeng <kelemeng@gnome.hu>\n"
-"Language-Team: Hungarian <openscope@googlegroups.com>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-06 14:07+0100\n"
+"PO-Revision-Date: 2017-09-19 09:08+0000\n"
+"Last-Translator: kelemeng <kelemeng@ubuntu.com>\n"
+"Language-Team: Hungarian (http://www.transifex.com/freedesktop/fprintd/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,28 +19,28 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/net.reactivated.fprint.device.policy.in.h:1
+msgid "Verify a fingerprint"
+msgstr "Ujjlenyomat ellenőrzése"
+
+#: ../data/net.reactivated.fprint.device.policy.in.h:2
+msgid "Privileges are required to verify fingerprints."
+msgstr "Jogosultság szükséges az ujjlenyomatok ellenőrzéséhez."
+
+#: ../data/net.reactivated.fprint.device.policy.in.h:3
 msgid "Enroll new fingerprints"
 msgstr "Új ujjlenyomatok felvétele"
 
-#: ../data/net.reactivated.fprint.device.policy.in.h:2
-msgid "Privileges are required to enroll new fingerprints for other users."
-msgstr "Jogosultság szükséges új ujjlenyomatok felvételéhez más felhasználóknak."
-
-#: ../data/net.reactivated.fprint.device.policy.in.h:3
+#: ../data/net.reactivated.fprint.device.policy.in.h:4
 msgid "Privileges are required to enroll new fingerprints."
 msgstr "Jogosultság szükséges új ujjlenyomatok felvételéhez."
-
-#: ../data/net.reactivated.fprint.device.policy.in.h:4
-msgid "Privileges are required to verify fingerprints."
-msgstr "Jogosultság szükséges az ujjlenyomatok ellenőrzéséhez."
 
 #: ../data/net.reactivated.fprint.device.policy.in.h:5
 msgid "Select a user to enroll"
 msgstr "Válassza ki a felveendő felhasználót"
 
 #: ../data/net.reactivated.fprint.device.policy.in.h:6
-msgid "Verify a fingerprint"
-msgstr "Ujjlenyomat ellenőrzése"
+msgid "Privileges are required to enroll new fingerprints for other users."
+msgstr "Jogosultság szükséges új ujjlenyomatok felvételéhez más felhasználóknak."
 
 #: ../src/device.c:385
 #, c-format
@@ -250,22 +250,22 @@ msgstr "Húzza le a jobb kisujját az ujjlenyomat-olvasón"
 msgid "Swipe your right little finger across %s"
 msgstr "Húzza le a jobb kisujját ezen: %s"
 
-#: ../pam/fingerprint-strings.h:126 ../pam/fingerprint-strings.h:152
+#: ../pam/fingerprint-strings.h:131 ../pam/fingerprint-strings.h:157
 msgid "Place your finger on the reader again"
 msgstr "Helyezze ismét az olvasóra az ujját"
 
-#: ../pam/fingerprint-strings.h:128 ../pam/fingerprint-strings.h:154
+#: ../pam/fingerprint-strings.h:133 ../pam/fingerprint-strings.h:159
 msgid "Swipe your finger again"
 msgstr "Húzza le ismét az ujját"
 
-#: ../pam/fingerprint-strings.h:131 ../pam/fingerprint-strings.h:157
+#: ../pam/fingerprint-strings.h:136 ../pam/fingerprint-strings.h:162
 msgid "Swipe was too short, try again"
 msgstr "A lehúzás túl gyors volt, próbálja újra"
 
-#: ../pam/fingerprint-strings.h:133 ../pam/fingerprint-strings.h:159
+#: ../pam/fingerprint-strings.h:138 ../pam/fingerprint-strings.h:164
 msgid "Your finger was not centered, try swiping your finger again"
 msgstr "Az ujja nem volt középen, próbálj ismét lehúzni"
 
-#: ../pam/fingerprint-strings.h:135 ../pam/fingerprint-strings.h:161
+#: ../pam/fingerprint-strings.h:140 ../pam/fingerprint-strings.h:166
 msgid "Remove your finger, and try swiping your finger again"
 msgstr "Vegye el az ujját és próbálja újra lehúzni"

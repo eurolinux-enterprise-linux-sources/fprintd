@@ -4,7 +4,7 @@ fprintd - Fingerprint management daemon, and test applications
 
 =head1 SYNOPSYS
 
-B<fprintd-enroll> [username]
+B<fprintd-enroll> [-f finger] [usename]
 
 B<fprintd-list> username [usernames...]
 
@@ -100,3 +100,6 @@ By default, fprintd stores the fingerprints in B</var/lib/fprint/>
 =over 8
 
 =item B<dbus-daemon>, B<gnome-about-me>
+
+=back
+

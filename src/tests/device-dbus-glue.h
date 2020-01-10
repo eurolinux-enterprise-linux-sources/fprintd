@@ -7,11 +7,7 @@ G_BEGIN_DECLS
 
 #ifndef _DBUS_GLIB_ASYNC_DATA_FREE
 #define _DBUS_GLIB_ASYNC_DATA_FREE
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-void
+static inline void
 _dbus_glib_async_data_free (gpointer stuff)
 {
 	g_slice_free (DBusGAsyncData, stuff);
@@ -21,11 +17,7 @@ _dbus_glib_async_data_free (gpointer stuff)
 #ifndef DBUS_GLIB_CLIENT_WRAPPERS_net_reactivated_Fprint_Device
 #define DBUS_GLIB_CLIENT_WRAPPERS_net_reactivated_Fprint_Device
 
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-gboolean
+static inline gboolean
 net_reactivated_Fprint_Device_list_enrolled_fingers (DBusGProxy *proxy, const char * IN_username, char *** OUT_enrolled_fingers, GError **error)
 
 {
@@ -45,11 +37,7 @@ net_reactivated_Fprint_Device_list_enrolled_fingers_async_callback (DBusGProxy *
   return;
 }
 
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-DBusGProxyCall*
+static inline DBusGProxyCall*
 net_reactivated_Fprint_Device_list_enrolled_fingers_async (DBusGProxy *proxy, const char * IN_username, net_reactivated_Fprint_Device_list_enrolled_fingers_reply callback, gpointer userdata)
 
 {
@@ -59,11 +47,7 @@ net_reactivated_Fprint_Device_list_enrolled_fingers_async (DBusGProxy *proxy, co
   stuff->userdata = userdata;
   return dbus_g_proxy_begin_call (proxy, "ListEnrolledFingers", net_reactivated_Fprint_Device_list_enrolled_fingers_async_callback, stuff, _dbus_glib_async_data_free, G_TYPE_STRING, IN_username, G_TYPE_INVALID);
 }
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-gboolean
+static inline gboolean
 net_reactivated_Fprint_Device_delete_enrolled_fingers (DBusGProxy *proxy, const char * IN_username, GError **error)
 
 {
@@ -82,11 +66,7 @@ net_reactivated_Fprint_Device_delete_enrolled_fingers_async_callback (DBusGProxy
   return;
 }
 
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-DBusGProxyCall*
+static inline DBusGProxyCall*
 net_reactivated_Fprint_Device_delete_enrolled_fingers_async (DBusGProxy *proxy, const char * IN_username, net_reactivated_Fprint_Device_delete_enrolled_fingers_reply callback, gpointer userdata)
 
 {
@@ -96,11 +76,7 @@ net_reactivated_Fprint_Device_delete_enrolled_fingers_async (DBusGProxy *proxy, 
   stuff->userdata = userdata;
   return dbus_g_proxy_begin_call (proxy, "DeleteEnrolledFingers", net_reactivated_Fprint_Device_delete_enrolled_fingers_async_callback, stuff, _dbus_glib_async_data_free, G_TYPE_STRING, IN_username, G_TYPE_INVALID);
 }
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-gboolean
+static inline gboolean
 net_reactivated_Fprint_Device_claim (DBusGProxy *proxy, const char * IN_username, GError **error)
 
 {
@@ -119,11 +95,7 @@ net_reactivated_Fprint_Device_claim_async_callback (DBusGProxy *proxy, DBusGProx
   return;
 }
 
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-DBusGProxyCall*
+static inline DBusGProxyCall*
 net_reactivated_Fprint_Device_claim_async (DBusGProxy *proxy, const char * IN_username, net_reactivated_Fprint_Device_claim_reply callback, gpointer userdata)
 
 {
@@ -133,11 +105,7 @@ net_reactivated_Fprint_Device_claim_async (DBusGProxy *proxy, const char * IN_us
   stuff->userdata = userdata;
   return dbus_g_proxy_begin_call (proxy, "Claim", net_reactivated_Fprint_Device_claim_async_callback, stuff, _dbus_glib_async_data_free, G_TYPE_STRING, IN_username, G_TYPE_INVALID);
 }
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-gboolean
+static inline gboolean
 net_reactivated_Fprint_Device_release (DBusGProxy *proxy, GError **error)
 
 {
@@ -156,11 +124,7 @@ net_reactivated_Fprint_Device_release_async_callback (DBusGProxy *proxy, DBusGPr
   return;
 }
 
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-DBusGProxyCall*
+static inline DBusGProxyCall*
 net_reactivated_Fprint_Device_release_async (DBusGProxy *proxy, net_reactivated_Fprint_Device_release_reply callback, gpointer userdata)
 
 {
@@ -170,11 +134,7 @@ net_reactivated_Fprint_Device_release_async (DBusGProxy *proxy, net_reactivated_
   stuff->userdata = userdata;
   return dbus_g_proxy_begin_call (proxy, "Release", net_reactivated_Fprint_Device_release_async_callback, stuff, _dbus_glib_async_data_free, G_TYPE_INVALID);
 }
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-gboolean
+static inline gboolean
 net_reactivated_Fprint_Device_verify_start (DBusGProxy *proxy, const char * IN_finger_name, GError **error)
 
 {
@@ -193,11 +153,7 @@ net_reactivated_Fprint_Device_verify_start_async_callback (DBusGProxy *proxy, DB
   return;
 }
 
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-DBusGProxyCall*
+static inline DBusGProxyCall*
 net_reactivated_Fprint_Device_verify_start_async (DBusGProxy *proxy, const char * IN_finger_name, net_reactivated_Fprint_Device_verify_start_reply callback, gpointer userdata)
 
 {
@@ -207,11 +163,7 @@ net_reactivated_Fprint_Device_verify_start_async (DBusGProxy *proxy, const char 
   stuff->userdata = userdata;
   return dbus_g_proxy_begin_call (proxy, "VerifyStart", net_reactivated_Fprint_Device_verify_start_async_callback, stuff, _dbus_glib_async_data_free, G_TYPE_STRING, IN_finger_name, G_TYPE_INVALID);
 }
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-gboolean
+static inline gboolean
 net_reactivated_Fprint_Device_verify_stop (DBusGProxy *proxy, GError **error)
 
 {
@@ -230,11 +182,7 @@ net_reactivated_Fprint_Device_verify_stop_async_callback (DBusGProxy *proxy, DBu
   return;
 }
 
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-DBusGProxyCall*
+static inline DBusGProxyCall*
 net_reactivated_Fprint_Device_verify_stop_async (DBusGProxy *proxy, net_reactivated_Fprint_Device_verify_stop_reply callback, gpointer userdata)
 
 {
@@ -244,11 +192,7 @@ net_reactivated_Fprint_Device_verify_stop_async (DBusGProxy *proxy, net_reactiva
   stuff->userdata = userdata;
   return dbus_g_proxy_begin_call (proxy, "VerifyStop", net_reactivated_Fprint_Device_verify_stop_async_callback, stuff, _dbus_glib_async_data_free, G_TYPE_INVALID);
 }
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-gboolean
+static inline gboolean
 net_reactivated_Fprint_Device_enroll_start (DBusGProxy *proxy, const char * IN_finger_name, GError **error)
 
 {
@@ -267,11 +211,7 @@ net_reactivated_Fprint_Device_enroll_start_async_callback (DBusGProxy *proxy, DB
   return;
 }
 
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-DBusGProxyCall*
+static inline DBusGProxyCall*
 net_reactivated_Fprint_Device_enroll_start_async (DBusGProxy *proxy, const char * IN_finger_name, net_reactivated_Fprint_Device_enroll_start_reply callback, gpointer userdata)
 
 {
@@ -281,11 +221,7 @@ net_reactivated_Fprint_Device_enroll_start_async (DBusGProxy *proxy, const char 
   stuff->userdata = userdata;
   return dbus_g_proxy_begin_call (proxy, "EnrollStart", net_reactivated_Fprint_Device_enroll_start_async_callback, stuff, _dbus_glib_async_data_free, G_TYPE_STRING, IN_finger_name, G_TYPE_INVALID);
 }
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-gboolean
+static inline gboolean
 net_reactivated_Fprint_Device_enroll_stop (DBusGProxy *proxy, GError **error)
 
 {
@@ -304,11 +240,7 @@ net_reactivated_Fprint_Device_enroll_stop_async_callback (DBusGProxy *proxy, DBu
   return;
 }
 
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-DBusGProxyCall*
+static inline DBusGProxyCall*
 net_reactivated_Fprint_Device_enroll_stop_async (DBusGProxy *proxy, net_reactivated_Fprint_Device_enroll_stop_reply callback, gpointer userdata)
 
 {

@@ -7,11 +7,7 @@ G_BEGIN_DECLS
 
 #ifndef _DBUS_GLIB_ASYNC_DATA_FREE
 #define _DBUS_GLIB_ASYNC_DATA_FREE
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-void
+static inline void
 _dbus_glib_async_data_free (gpointer stuff)
 {
 	g_slice_free (DBusGAsyncData, stuff);
@@ -21,11 +17,7 @@ _dbus_glib_async_data_free (gpointer stuff)
 #ifndef DBUS_GLIB_CLIENT_WRAPPERS_net_reactivated_Fprint_Manager
 #define DBUS_GLIB_CLIENT_WRAPPERS_net_reactivated_Fprint_Manager
 
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-gboolean
+static inline gboolean
 net_reactivated_Fprint_Manager_get_devices (DBusGProxy *proxy, GPtrArray** OUT_devices, GError **error)
 
 {
@@ -45,11 +37,7 @@ net_reactivated_Fprint_Manager_get_devices_async_callback (DBusGProxy *proxy, DB
   return;
 }
 
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-DBusGProxyCall*
+static inline DBusGProxyCall*
 net_reactivated_Fprint_Manager_get_devices_async (DBusGProxy *proxy, net_reactivated_Fprint_Manager_get_devices_reply callback, gpointer userdata)
 
 {
@@ -59,11 +47,7 @@ net_reactivated_Fprint_Manager_get_devices_async (DBusGProxy *proxy, net_reactiv
   stuff->userdata = userdata;
   return dbus_g_proxy_begin_call (proxy, "GetDevices", net_reactivated_Fprint_Manager_get_devices_async_callback, stuff, _dbus_glib_async_data_free, G_TYPE_INVALID);
 }
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-gboolean
+static inline gboolean
 net_reactivated_Fprint_Manager_get_default_device (DBusGProxy *proxy, char** OUT_device, GError **error)
 
 {
@@ -83,11 +67,7 @@ net_reactivated_Fprint_Manager_get_default_device_async_callback (DBusGProxy *pr
   return;
 }
 
-static
-#ifdef G_HAVE_INLINE
-inline
-#endif
-DBusGProxyCall*
+static inline DBusGProxyCall*
 net_reactivated_Fprint_Manager_get_default_device_async (DBusGProxy *proxy, net_reactivated_Fprint_Manager_get_default_device_reply callback, gpointer userdata)
 
 {

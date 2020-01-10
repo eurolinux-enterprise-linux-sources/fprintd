@@ -1,11 +1,11 @@
 Name:		fprintd
-Version:	0.5.0
-Release:	4.0%{?dist}
+Version:	0.8.1
+Release:	2%{?dist}
 Summary:	D-Bus service for Fingerprint reader access
 
 Group:		System Environment/Daemons
 License:	GPLv2+
-Source0:	http://freedesktop.org/~hadess/%{name}-%{version}.tar.bz2
+Source0:	https://gitlab.freedesktop.org/libfprint/fprintd/uploads/bdd9f91909f535368b7c21f72311704a/%{name}-%{version}.tar.xz
 Url:		http://www.freedesktop.org/wiki/Software/fprint/fprintd
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 ExcludeArch:    s390 s390x
@@ -19,8 +19,8 @@ BuildRequires:	intltool
 BuildRequires:  autoconf automake libtool
 BuildRequires:	perl-podlators
 
-Patch0:		0001-data-Fix-syntax-error-in-fprintd.pod.patch
-Patch1:		0001-pam-Fix-eventfd-leak.patch
+# https://bugzilla.redhat.com/show_bug.cgi?id=1630309
+Patch0: 0001-Remove-sandboxing-that-s-unsupported-in-RHEL7-s-syst.patch
 
 %description
 D-Bus service to access fingerprint readers.
@@ -52,9 +52,7 @@ Development documentation for fprintd, the D-Bus service for
 fingerprint readers access.
 
 %prep
-%setup -q -n %{name}-%{version}
-%patch0 -p1
-%patch1 -p1
+%autosetup -p1
 
 %build
 %configure --libdir=/%{_lib}/ --enable-gtk-doc --enable-pam
@@ -99,9 +97,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dbus-1/interfaces/net.reactivated.Fprint.Manager.xml
 
 %changelog
-* Mon May 12 2014 Bastien Nocera <bnocera@redhat.com> 0.5.0-4.0
-- Bump revision
-Resolves: #1050827
+* Fri Sep 21 2018 Bastien Nocera <bnocera@redhat.com> - 0.8.1-2
++ fprintd-0.8.1-2
+- Fix systemd warnings
+- Resolves: #1630309
+
+* Mon Jun 18 2018 Bastien Nocera <bnocera@redhat.com> - 0.8.1-1
++ fprintd-0.8.1-1
+- Update to 0.8.1
+- Resolves: #1591757
 
 * Mon May 12 2014 Bastien Nocera <bnocera@redhat.com> 0.5.0-4
 - Fix single eventfd leak for each iteration

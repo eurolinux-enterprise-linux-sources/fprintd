@@ -1,6 +1,37 @@
 This file lists notable changes in each release. For the full history of all
 changes, see ChangeLog.
 
+version 0.8.1:
+- Fix build when builddir != srcdir
+- Fix possible crash on exit
+- Avoid warnings in copy/paste header
+- Sandbox fprintd daemon more
+- Update website address
+- Minimise debug output
+- Updated translations
+
+version 0.8.0:
+- Lockdown the daemon to minimise potential security issues
+- Don't wake up readers when there's no enrolled fingerprints
+
+version 0.7.0:
+- Fix crash in the daemon when cancelling PAM conversation
+- Fix build warnings and update translations
+
+version 0.6.0:
+- Fix warning in fprintd.pod file
+- Reduce logging during normal operation
+- Fix eventfd leak in PAM module
+- List possible values for finger when enrolling
+- Fix possible crash in fprintd-verify
+- Fix listing and deleting fingerprints when there's more than
+  one reader available
+
+version 0.5.1:
+- Add max_tries and timeout arguments to PAM module
+- Add ability to require the fingerprint for enrolled users
+- Add "-f <finger>" option to enroll utilities
+
 version 0.5.0:
 - Don't use a device name if there's only one reader
 - Avoid possible crash when trying to login without devices

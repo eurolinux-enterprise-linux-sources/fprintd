@@ -1,0 +1,43 @@
+From 3eb55a6e11efcaab94d6595bfbdbe8ab6557f662 Mon Sep 17 00:00:00 2001
+From: Bastien Nocera <hadess@hadess.net>
+Date: Fri, 21 Sep 2018 12:33:21 +0200
+Subject: [PATCH] Remove sandboxing that's unsupported in RHEL7's systemd
+
+---
+ data/fprintd.service.in | 14 +-------------
+ 1 file changed, 1 insertion(+), 13 deletions(-)
+
+diff --git a/data/fprintd.service.in b/data/fprintd.service.in
+index 5f46810..05f4ddf 100644
+--- a/data/fprintd.service.in
++++ b/data/fprintd.service.in
+@@ -8,10 +8,7 @@ BusName=net.reactivated.Fprint
+ ExecStart=@libexecdir@/fprintd
+ 
+ # Filesystem lockdown
+-ProtectSystem=strict
+-ProtectKernelTunables=true
+-ProtectControlGroups=true
+-ReadWritePaths=@localstatedir@/lib/fprint
++ProtectSystem=true
+ ProtectHome=true
+ PrivateTmp=true
+ 
+@@ -19,14 +16,5 @@ PrivateTmp=true
+ PrivateNetwork=true
+ RestrictAddressFamilies=AF_UNIX AF_LOCAL AF_NETLINK
+ 
+-# Execute Mappings
+-MemoryDenyWriteExecute=true
+-
+-# Modules
+-ProtectKernelModules=true
+-
+-# Real-time
+-RestrictRealtime=true
+-
+ # Privilege escalation
+ NoNewPrivileges=true
+-- 
+2.17.1
+

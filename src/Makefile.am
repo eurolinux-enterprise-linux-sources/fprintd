@@ -22,7 +22,8 @@ check-translations:
 	done;
 
 update-translations: create-pot check-translations
-	@tx pull --all --force --skip
+	@tx -r $(srcdir) pull --all --force --skip
+	@if [ ! -d .tx ] ; then mkdir .tx ; fi ; if [ x$(srcdir) != x$(builddir) ] ; then cp -f $(srcdir)/.tx/config .tx/ ; fi
 	@tx push --source
 
 -include $(top_srcdir)/git.mk

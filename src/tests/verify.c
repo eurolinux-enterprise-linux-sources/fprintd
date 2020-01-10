@@ -27,7 +27,7 @@
 
 static DBusGProxy *manager = NULL;
 static DBusGConnection *connection = NULL;
-static char *finger_name = "any";
+static char *finger_name = NULL;
 static gboolean g_fatal_warnings = FALSE;
 static char **usernames = NULL;
 
@@ -99,8 +99,10 @@ static void find_finger(DBusGProxy *dev, const char *username)
 		g_print(" - #%d: %s\n", i, fingers[i]);
 	}
 
-	if (strcmp (finger_name, "any") == 0)
-		finger_name = fingers[0];
+	if (finger_name == NULL || strcmp (finger_name, "any") == 0) {
+		g_free (finger_name);
+		finger_name = g_strdup (fingers[0]);
+	}
 
 	g_strfreev (fingers);
 }
@@ -170,7 +172,9 @@ int main(int argc, char **argv)
 	DBusGProxy *dev;
 	char *username;
 
+#if !GLIB_CHECK_VERSION (2, 36, 0)
 	g_type_init();
+#endif
 
 	dbus_g_object_register_marshaller (fprintd_marshal_VOID__STRING_BOOLEAN,
 					   G_TYPE_NONE, G_TYPE_STRING, G_TYPE_BOOLEAN, G_TYPE_INVALID);
